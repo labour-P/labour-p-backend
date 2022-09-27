@@ -9,7 +9,7 @@ import  {sms} from "../middlewares/tarmi.js";
 //import { createCustomAPIError } from "../errors/custom-error";
 
 const secret = "myawesome-secret";
-
+//signin
 export const signin = asyncWrapper(async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -36,6 +36,53 @@ export const signin = asyncWrapper(async (req, res) => {
   }
 });
 
+//signup
+
+
+
+
+// verifyAccount
+export const verifyAccount = asyncWrapper(async (req, res) => {
+  const {email,
+    phone} = req.body;
+    try {
+      const emailexist = await user.findOne({ email });
+      const phoneexist = await user.findOne({ phone });
+      if (emailexist || phoneexist ){
+        return res.status(400).json({ message: "User already exists" });
+      }else{
+          return sms({phone});
+        }
+
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: "Something went wrong", error: err.message });
+    }
+  });
+
+
+  
+// verifyAccount
+export const verifyUsername = asyncWrapper(async (req, res) => {
+  const {username} = req.body;
+    try {
+      const usernameexist = await user.findOne({ username });
+      
+      if (usernameexist ){
+        return res.status(400).json({ message: "User already exists" });
+      }else{
+        return res.status(200).json({ message: "Username available" });
+        }
+
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: "Something went wrong", error: err.message });
+    }
+  });
+
+  
 export const signup = asyncWrapper(async (req, res) => {
   const {
     firstName,
@@ -81,8 +128,10 @@ export const signup = asyncWrapper(async (req, res) => {
     });
    
     // signupSuccess(result.name, email, password);
-    res.status(201).json({ result, token });
-    sms(phone);
+    // res.status(201).json({ result, token });
+    // sms({phone});
+    const sms =await sms({phone});
+    res.status(201).json({ smsresponse, sms });
 return result;
   } catch (err) {
     res
@@ -91,6 +140,7 @@ return result;
   }
 });
 
+// reset password
 export const forgetPassword = asyncWrapper(async (req, res) => {
   try {
 
@@ -111,9 +161,9 @@ export const forgetPassword = asyncWrapper(async (req, res) => {
       }).save();
     }
 
-    const link = `https://fixa.com.ng/passwordreset/?token=${token.resetPasswordToken}&id=${user._id}&email=${req.body.email}`;
+    const link = `https://labourp.com/passwordreset/?token=${token.resetPasswordToken}&id=${user._id}&email=${req.body.email}`;
 
-    forgotPassword(user.email, link);
+    forgetPassword(user.email, link);
     return res.status(200).json({
       message: `a link has been sent to your email -${req.body.email}`,
     });
@@ -121,7 +171,7 @@ export const forgetPassword = asyncWrapper(async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 });
-
+// reset password
 export const checkResetLink = asyncWrapper(async (req, res) => {
   try {
     let token = await Token.findOne({ resetPasswordToken: req.params.token });

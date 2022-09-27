@@ -3,6 +3,7 @@ import request from "request";
 
 export const sms = async (req, res, next) => {
 	const {phone}=req;
+	// console.log(phone);
     try {
 		
 		var data = {
@@ -25,7 +26,11 @@ export const sms = async (req, res, next) => {
 		request(options, function (error, response) { 
 		if (error) throw new Error(error);
 		console.log(response.body);
+		return response.body;
 		});		
 
-            }catch(err){}
+            }catch(error){
+				next(error);
+			}
+
         }
