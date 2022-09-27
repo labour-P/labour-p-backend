@@ -1,0 +1,41 @@
+{
+  "name": "labour-p",
+  "version": "1.0.0",
+  "main": "app.js",
+  "module": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eagle-Apps/fixa-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eagle-Apps/fixa-backend.git/issues"
+  },
+  "homepage": "https://github.com/Eagle-Apps/fixa-backend.git#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "esm": "^3.2.25",
+    "express": "^4.18.1",
+    "form-data": "^4.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mailgun.js": "^8.0.1",
+    "mongoose": "^6.5.0",
+    "node": "^18.9.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "description": ""
+}
