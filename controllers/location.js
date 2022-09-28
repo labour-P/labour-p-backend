@@ -1,12 +1,13 @@
 import request from "request";
 import { asyncWrapper } from "../middlewares/async.js";
 
+
 export const getState = asyncWrapper(async (req, res) => {
   try {
     var options= {
         "async": true,
         "crossDomain": true,
-        "url": "https://http://allnigeria-api.herokuapp.com/api/v1/states",
+        "url": "http://allnigeria-api.herokuapp.com/api/v1/states",
         "method": "GET",
         "headers": {
             "accept": "application/json"
@@ -53,13 +54,13 @@ export const getLga = asyncWrapper(async (req, res) => {
   
 
   export const getWard = asyncWrapper(async (req, res) => {
-    try {
-        const {lgas}=req.body;
+   
+        const {lga}=req.body;
         try {
             var options= {
                 "async": true,
                 "crossDomain": true,
-                "url": "https://http://allnigeria-api.herokuapp.com/api/v1/ward/{lgas}",
+                "url": "https://http://allnigeria-api.herokuapp.com/api/v1/ward/{lga}",
                 "method": "GET",
                 "headers": {
                     "accept": "application/json"
@@ -79,8 +80,8 @@ export const getLga = asyncWrapper(async (req, res) => {
   
 
   export const getUnit = asyncWrapper(async (req, res) => {
-    try {
-        const  {}=req.body;
+ 
+        const  {units}=req.body;
         try {
             var options= {
                 "async": true,
