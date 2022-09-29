@@ -28,7 +28,7 @@ app.use("/api/routes", routes);
 
 
 app.get("/", function(req, res){
- res.send("welcome to Labour-P");
+ res.send("welcome to Labour-P API's");
  });
 
 
