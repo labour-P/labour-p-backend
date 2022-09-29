@@ -28,7 +28,7 @@ app.use("/api/routes", routes);
 
 
 app.get("/", function(req, res){
- res.send("welcome to Labour-P API's");
+ res.send("welcome to Labour-P API");
  });
 
 
@@ -36,7 +36,7 @@ app.get("/", function(req, res){
 
 app.use(errorHandler);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 
 const start = () => {
  try {
