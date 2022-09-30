@@ -2,9 +2,11 @@ import express from "express";
 import {createPosts,viewPosts,createComments, viewComments, rate } from "../controllers/posts.js";
 import {Contribute,getContribute,getdonate, donate } from "../controllers/controllers.js";
 import {watsapp } from "../controllers/watsapp.js";
-
+import {addState} from "../controllers/state.js";
 
 const route = express.Router();
+
+route.post("/state/", addState);
 
 route.post("/posts/", createPosts);
 route.get("/posts/", viewPosts);
