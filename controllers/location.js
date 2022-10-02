@@ -1,5 +1,6 @@
 import request from "request";
 import { asyncWrapper } from "../middlewares/async.js";
+import State from "../models/state.js";
 
 
 export const getState = asyncWrapper(async (req, res) => {

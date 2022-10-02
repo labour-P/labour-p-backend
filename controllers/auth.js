@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import user from "../models/user.js";
 import Token from "../models/Token.js";
-import  {sms} from "../middlewares/tarmi.js";
+import  {sms} from "../middlewares/sms.js";
 
 // import { verifyemail, forgotPassword, signupSuccess } from "../mail/mailgun.js";
 //import { createCustomAPIError } from "../errors/custom-error";
@@ -63,7 +63,7 @@ export const verifyAccount = asyncWrapper(async (req, res) => {
 
 
   
-// verifyAccount
+// verifyUsername
 export const verifyUsername = asyncWrapper(async (req, res) => {
   const {username} = req.body;
     try {
@@ -129,8 +129,8 @@ export const signup = asyncWrapper(async (req, res) => {
    
     // signupSuccess(result.name, email, password);
     // res.status(201).json({ result, token });
-    // sms({phone});
-    const sms =await sms({phone});
+     sms({phone});
+    // const sms =await sms({phone});
     res.status(201).json({ smsresponse, sms });
 return result;
   } catch (err) {
