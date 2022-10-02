@@ -2,7 +2,7 @@ import request from "request";
 		
 
 export const sms = async (req, res, next) => {
-	const {phone}=req;
+	const {phone}=phone;
 	// console.log(phone);
     try {
 		
