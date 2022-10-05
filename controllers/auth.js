@@ -54,9 +54,7 @@ export const verifyAccount = asyncWrapper(async (req, res) => {
         const text= "your otp is:";
         const token= "123567";
 const message={
-token,
-phone,
-text
+token,phone,text
 }
         sms({message});
         res
