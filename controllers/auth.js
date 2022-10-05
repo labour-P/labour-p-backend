@@ -102,10 +102,10 @@ export const signup = asyncWrapper(async (req, res) => {
     lastName,
     userName,
     email,
-    address,
+    
     password,
     phone,
-    city,
+    
     state,
     lga,
     ward,
@@ -134,8 +134,7 @@ export const signup = asyncWrapper(async (req, res) => {
       userName,
       phone,
       email,
-      address,
-      city,
+      
       state,
       lga,
     ward,
