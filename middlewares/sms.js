@@ -33,7 +33,7 @@ const {
 		request(options, function (error, response) { 
 		if (error) throw new Error(error);
 		console.log(response.body);
-		console.log(url);
+		console.log(options);
 		return response.body;
 		});		
 
