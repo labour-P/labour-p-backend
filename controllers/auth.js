@@ -140,9 +140,22 @@ export const signup = asyncWrapper(async (req, res) => {
       expiresIn: "2h",
     });
    
+
+    const text= "your otp is:";
+    const token= "123567";
+    const phonenum= phone;
+const message={
+token,phonenum,text
+};
+console.log(phonenum);
+    sms({message});
+    res
+    .status(200)
+    .json({ message: "email and phone number available", token: token });
+   
     // signupSuccess(result.name, email, password);
     // res.status(201).json({ result, token });
-     sms({phone});
+    //  sms({phone});
     // const sms =await sms({phone});
     res.status(201).json({ smsresponse, sms });
 return result;
