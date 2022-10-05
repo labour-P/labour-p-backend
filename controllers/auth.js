@@ -114,8 +114,15 @@ export const signup = asyncWrapper(async (req, res) => {
   } = req.body;
   try {
     const oldUser = await user.findOne({ email });
+    const oldUserphone = await user.findOne({ phone });
+    const oldUsername = await user.findOne({ userName });
 
-   
+    if (oldUsername)
+    return res.status(400).json({ message: "User already exists" });
+
+    if (oldUserphone)
+      return res.status(400).json({ message: "User already exists" });
+
     if (oldUser)
       return res.status(400).json({ message: "User already exists" });
 
