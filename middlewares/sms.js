@@ -2,12 +2,18 @@ import request from "request";
 		
 
 export const sms = async (req, res, next) => {
-	const {phone, message}=req;
+	const {message}=req;
+const {
+	text,
+	phone,
+	token
+}=message;
+
 	// console.log(phone);
     try { 
        
 		
-		// var data = {
+		// var  = {
 		// 			 "api_key": "TL6Rr8Azc8uOtpxBXWouMxCzZnfAENdVh8D9CtsiiJSq2OAPJo6TcjvmmlQgvb",
 		// 			 "pin_type": "NUMERIC",
 		// 			 "phone_number": phone,
@@ -17,7 +23,7 @@ export const sms = async (req, res, next) => {
 		// 		  };
 		var options = {
 		'method': 'GET',
-		'url': 'https://netbulksms.com/index.php?option=com_spc&comm=spc_api&username=labourp& password=labourp123&sender=LabourP&recipient={phone}&message={message}',
+		'url': 'https://netbulksms.com/index.php?option=com_spc&comm=spc_api&username=labourp& password=labourp123&sender=LabourP&recipient={phone}&message={text}+{token}',
 		// 'headers': {
 		//   'Content-Type': ['application/json', 'application/json']
 		// },
