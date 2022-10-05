@@ -136,9 +136,9 @@ export const signup = asyncWrapper(async (req, res) => {
     age,
     });
 
-    const token = jwt.sign({ email: result.email, id: result._id }, secret, {
-      expiresIn: "2h",
-    });
+    // const token = jwt.sign({ email: result.email, id: result._id }, secret, {
+    //   expiresIn: "2h",
+    // });
    
 
     const text= "your otp is:";
