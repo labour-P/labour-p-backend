@@ -143,7 +143,7 @@ export const signup = asyncWrapper(async (req, res) => {
 
     res
     .status(200)
-    .json({ message:"login sucessfull", "data": result });
+    .json({ message:"login sucessfull", "result": result });
    
     // signupSuccess(result.name, email, password);
     // res.status(201).json({ result, token });
