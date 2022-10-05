@@ -45,8 +45,7 @@ export const signin = asyncWrapper(async (req, res) => {
 export const verifyAccount = asyncWrapper(async (req, res) => {
  
     try {
-      const {email,
-        phone} = req.body;
+      const {email,phone} = req.body;
         console.log(phone);
         console.log(email);
         
