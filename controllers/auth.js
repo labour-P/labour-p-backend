@@ -58,7 +58,7 @@ token,
 phone,
 text
 }
-        sms(message);
+        sms({message});
         res
         .status(200)
         .json({ message: "email and phone number available", token: token });
