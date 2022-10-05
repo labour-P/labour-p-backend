@@ -45,6 +45,7 @@ export const signin = asyncWrapper(async (req, res) => {
 export const verifyAccount = asyncWrapper(async (req, res) => {
   const {email,
     phone} = req.body;
+    console.log(phone);
     try {
       const emailexist = await user.findOne({ email });
       const phoneexist = await user.findOne({ phone });
@@ -56,7 +57,8 @@ export const verifyAccount = asyncWrapper(async (req, res) => {
         const phonenum= phone;
 const message={
 token,phonenum,text
-}
+};
+console.log(phone);
         sms({message});
         res
         .status(200)

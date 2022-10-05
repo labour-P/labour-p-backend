@@ -24,9 +24,9 @@ const {
 		var options = {
 		'method': 'GET',
 		'url': 'https://netbulksms.com/index.php?option=com_spc&comm=spc_api&username=labourp&password=labourp123&sender=LabourP&recipient='+phonenum+'&message='+text+token+'&',
-		// 'headers': {
-		//   'Content-Type': ['application/json', 'application/json']
-		// },
+		'headers': {
+		  'Content-Type': ['application/json', 'application/json']
+		},
 		// body: JSON.stringify(data)
 		
 		};
