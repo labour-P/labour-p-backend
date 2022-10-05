@@ -49,9 +49,12 @@ export const verifyAccount = asyncWrapper(async (req, res) => {
       const emailexist = await user.findOne({ email });
       const phoneexist = await user.findOne({ phone });
       if (emailexist || phoneexist ){
-        return res.status(400).json({ message: "User already exists" });
+        res.status(400).json({ message: "User already exists" });
       }else{
-          return sms({phone});
+        const token= "123567";
+        res
+        .status(200)
+        .json({ message: "email and phone number available", token: token });
         }
 
     } catch (err) {
