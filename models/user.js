@@ -5,7 +5,7 @@ const UsersSchemamodel = mongoose.Schema({
   phone: { type: String, required: true },
   email: { type: String, required: true },
   userName: { type: String, required: true },
-  profileUrl: {  required: true},
+  profileUrl: { },
   password: { type: String, required: true },
   address: { type: String},
   city: { type: String},
