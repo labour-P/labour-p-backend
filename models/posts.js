@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
-const postSchema = mongoose.Schema({
+const PostSchema = mongoose.Schema({
   userid: { type: String, required: true},
+  username: { type: String, required: true},
+  name: { type: String, required: true},
+  profileurl: { type: String, required: true},
   thread: { type: String, required: true },
   location: { type: String, required: true },
   date: { type: String, required: true },
@@ -11,6 +14,6 @@ const postSchema = mongoose.Schema({
   videourl: {  },
 });
 
-export default mongoose.model("Posts", postSchema);
+export default mongoose.model("Posts", PostSchema);
 
 
