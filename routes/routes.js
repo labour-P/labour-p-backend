@@ -6,7 +6,7 @@ import {addState} from "../controllers/state.js";
 
 const route = express.Router();
 
-route.post("/state/", addState);
+// route.post("/state/", addState);
 
 route.post("/posts/", createPosts);
 route.get("/posts/", viewPosts);

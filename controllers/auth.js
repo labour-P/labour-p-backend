@@ -211,15 +211,14 @@ export const checkResetLink = asyncWrapper(async (req, res) => {
   }
 });
 
+
+
 export const resetPassword = asyncWrapper(async (req, res) => {
   try {
     const user = await user.findOne({ _id: req.body.id });
 
     if (!user) return res.status(404).json({ message: "user does not exist" });
 
-    if (req.body.password !== req.body.confirmPassword) {
-      return res.status(404).json({ message: "password doesn't match" });
-    }
     const hashedpassword = await bcrypt.hash(req.body.password, 12);
 
     user.password = hashedpassword;
@@ -232,6 +231,34 @@ export const resetPassword = asyncWrapper(async (req, res) => {
   }
 });
 
+
 export const update = asyncWrapper(async (req, res) => {
-  res.status(200).json({ message: "All tasks loaded" });
+  const {
+    firstName,
+    lastName,
+    userName,
+    email,
+    password,
+    phone,
+    state,
+    lga,
+    ward,
+    pollingUnit,
+    age,
+  } = req.body;
+  try {
+    const user = await user.findOne({ _id: req.body.id });
+
+    if (!user) return res.status(404).json({ message: "user does not exist" });
+
+    const hashedpassword = await bcrypt.hash(req.body.password, 12);
+
+    user.password = hashedpassword;
+    user.save();
+    return res.status(200).json({ message: "password changed successfully" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
 });

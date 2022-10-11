@@ -7,8 +7,8 @@ const commentSchema = mongoose.Schema({
   date: { type: String, required: true },
   time: { type: String, required: true },
   message: { type: String, required: true },
-  imageurl: { type: String, required: true },
-  videourl: { type: String, required: true },
+  imageurl: { },
+  videourl: { },
 
   
 });

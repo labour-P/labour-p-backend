@@ -30,8 +30,12 @@ router.post("/getUnit", getUnit);
 router.post("/getWard", getWard);
 
 router.post("/forgotpassword", forgetPassword);
-router.get("/checklink/:token", checkResetLink);
 router.patch("/resetpassword", resetPassword);
 router.patch("/update", update);
+
+
+
+
+// router.get("/checklink/:token", checkResetLink);
 
 export default router;
