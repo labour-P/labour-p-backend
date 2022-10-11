@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const RateSchema = mongoose.Schema({
+const RateSchemamodel = mongoose.Schema({
   userid: { type: String, required: true},
   username: { type: String, required: true},
   name: { type: String, required: true},
@@ -16,4 +16,4 @@ const RateSchema = mongoose.Schema({
 
 
 
-export default mongoose.model("Rate", RateSchema);
+export default mongoose.model("Rate", RateSchemamodel);

@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const CommentSchema = mongoose.Schema({
+const CommentSchemamodel = mongoose.Schema({
   userid: { type: String, required: true},
   username: { type: String, required: true},
   name: { type: String, required: true},
-  profileUrl: {  required: true},
+  profileUrl: {required: true},
   thread: {  required: true },
   location: { type: String, required: true },
   date: { type: String, required: true },
@@ -19,4 +19,4 @@ const CommentSchema = mongoose.Schema({
 
 
 
-export default mongoose.model("Comment", CommentSchema);
+export default mongoose.model("Comment", CommentSchemamodel);
