@@ -13,7 +13,7 @@ route.get("/posts/", viewPosts);
 
 route.post("/comments/", createComments);
 
-route.post("/veiwcomments/", viewComments);
+route.post("/viewcomments/", viewComments);
 route.post("/rate/", createRate);
 route.post("/rate/", viewRate);
 
