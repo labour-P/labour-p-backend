@@ -70,7 +70,7 @@ export const viewComments = asyncWrapper(async (req, res) => {
 
 
 // make a ratting
-export const creatRate = asyncWrapper(async (req, res) => {
+export const createRate = asyncWrapper(async (req, res) => {
   try {
       const addRating= new Rate(req.body);
       addRating.save();
