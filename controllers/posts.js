@@ -29,12 +29,15 @@ import { asyncWrapper } from "../middlewares/async.js";
  //get all comments
 export const viewComments = asyncWrapper(async (req, res) => {
     try {
-     
+      const  Comments = await  Comments.findOne({ thread: req.body.thread });
+
         Comments.find((err, stats)=>{
-            if(err){
-                return res.send(err);
+            if (!Comments){
+              res
+              .status(500)
+              .json({ message: "No Comments found" });
             }
-           return res.json(stats);
+           return res.json(Comments);
         });
     } catch (err) {
       res
