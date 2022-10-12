@@ -31,13 +31,13 @@ export const viewComments = asyncWrapper(async (req, res) => {
   const {
     thread}= req.body
     try {
-      const  Comments = await  Comments.findOne({ thread: thread });
+       Comments.findOne({ thread: thread });
 
-            if (!Comments){
-              res
-              .status(500)
-              .json({ message: "No Comments found" });
-            }
+            // if (!Comments){
+            //   res
+            //   .status(500)
+            //   .json({ message: "No Comments found" });
+            // }
            return res.json(Comments);
        
     } catch (err) {
