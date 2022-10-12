@@ -31,7 +31,7 @@ export const viewComments = asyncWrapper(async (req, res) => {
   const {
     thread}= req.body
     try {
-      const data= Comment.findOne({ thread: thread });
+      const data= Comment.findOne({ thread: {thread} });
 
             // if (!Comments){
             //   res
