@@ -36,7 +36,7 @@ app.get("/", function(req, res){
 
 app.use(errorHandler);
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 4000;
 
 const start = () => {
  try {
