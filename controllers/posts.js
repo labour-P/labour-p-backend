@@ -2,7 +2,7 @@
 import Posts from "../models/posts.js";
 
 import Rate from "../models/rate.js";
-import Comments from "../models/comments.js";
+import Comment from "../models/comments.js";
 
 import { asyncWrapper } from "../middlewares/async.js";
 
@@ -31,7 +31,7 @@ export const viewComments = asyncWrapper(async (req, res) => {
   const {
     thread}= req.body
     try {
-       Comments.findOne({ thread: thread });
+       Comment.findOne({ thread: thread });
 
             // if (!Comments){
             //   res
@@ -53,14 +53,13 @@ export const viewComments = asyncWrapper(async (req, res) => {
     try {
       const  Rate = await  Rate.findOne({ thread: req.body.thread });
 
-        Comments.find((err, stats)=>{
-            if (!Comments){
+            if (!Rate){
               res
               .status(500)
               .json({ message: "No Comments found" });
             }
            return res.json(Comments);
-        });
+      
     } catch (err) {
       res
         .status(500)
