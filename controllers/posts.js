@@ -28,8 +28,10 @@ import { asyncWrapper } from "../middlewares/async.js";
 
  //get all comments
 export const viewComments = asyncWrapper(async (req, res) => {
+  const {
+    thread}= req.body
     try {
-      const  Comments = await  Comments.findOne({ thread: req.body.thread });
+      const  Comments = await  Comments.findOne({ thread: thread });
 
         Comments.find((err, stats)=>{
             if (!Comments){
