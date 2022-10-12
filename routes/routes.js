@@ -1,5 +1,5 @@
 import express from "express";
-import {createPosts,viewPosts,createComments, viewComments, rate } from "../controllers/posts.js";
+import {createPosts,viewPosts,createComments, viewComments, createRate, viewRate  } from "../controllers/posts.js";
 import {Contribute,getContribute,getdonate, donate } from "../controllers/controllers.js";
 import {watsapp } from "../controllers/watsapp.js";
 import {addState} from "../controllers/state.js";
@@ -13,9 +13,9 @@ route.get("/posts/", viewPosts);
 
 route.post("/comments/", createComments);
 
-route.get("/comments/", viewComments);
-route.get("/rate/", rate);
-
+route.post("/veiwcomments/", viewComments);
+route.post("/rate/", createRate);
+route.post("/rate/", viewRate);
 
 route.post("/contribute/", Contribute);
 

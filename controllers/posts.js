@@ -47,12 +47,34 @@ export const viewComments = asyncWrapper(async (req, res) => {
   });
 
 
+  //view rating
+  export const viewRate = asyncWrapper(async (req, res) => {
+    try {
+      const  Rate = await  Rate.findOne({ thread: req.body.thread });
+
+        Comments.find((err, stats)=>{
+            if (!Comments){
+              res
+              .status(500)
+              .json({ message: "No Comments found" });
+            }
+           return res.json(Comments);
+        });
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: "Something went wrong", error: err.message });
+    }
+  });
+
+
+
 // make a ratting
-export const rate = asyncWrapper(async (req, res) => {
+export const creatRate = asyncWrapper(async (req, res) => {
   try {
       const addRating= new Rate(req.body);
       addRating.save();
-    res.status(201).json({ message: "Sucessfully added a ratiing" });
+    res.status(201).json({ message: "Sucessfully liked a post" });
   
      
   } catch (err) {
@@ -84,6 +106,9 @@ export const createPosts = asyncWrapper(async (req, res) => {
 export const createComments = asyncWrapper(async (req, res) => {
   const {
     userid,
+    username,
+    name,
+    profileUrl,
 thread,
 location,
 date,
@@ -95,19 +120,23 @@ videourl
   }= req.body
   try {
       const addComments= new Comments({userid,
-        thread,
-        location,
-        date,
-        time,
-        message,
-        imageurl,
-        videourl
+        userid,
+    username,
+    name,
+    profileUrl,
+thread,
+location,
+date,
+time,
+message,
+imageurl,
+videourl
         });
       addComments.save();
 
       //paystack integration goes here
 
-    res.status(201).json({ message: "Sucessfully added your created a comment" });
+    res.status(201).json({ message: "Sucessfully  created a comment" });
   
      
   } catch (err) {
@@ -117,84 +146,4 @@ videourl
   }
 });
 
-  
-
-//faultfind
-//this controller allows to get only data related to an id
-export const faultfind = asyncWrapper(async (req, res) => {
-    try {
-     const query= {};
-        if(req.query.status){
-            query.status=req.query;
-               }
-        fault.findById(req.params.faultid,(err, stats)=>{
-            if(err){
-                return res.send(err);
-            }
-           return res.json(stats);
-        });
-    } catch (err) {
-      res
-        .status(500)
-        .json({ message: "Something went wrong", error: err.message });
-    }
-  });
-  
-
-
-//filtering faults
-//this controller allows you to search for a fault by filtering 
-export const faultfilter = asyncWrapper(async (req, res) => {
-    try {
-       
-    const query= {};
-    if(req.query.status){
-        query.status=req.query.status;
-    } 
-
-  
-     if(req.query.faultid){
-        query.faultid=req.query.faultid;
-    }
-
- if(req.query.userid){
-        query.userid=req.query.userid;
-    }
-
- if(req.query.department){
-    query.department=req.query.department;
-}
- if(req.query.technician){
-    query.technician=req.query.technician;
-}
- if(req.query.providers){
-    query.providers=req.query.providers;
-}
- if(req.query.cost){
-    query.cost=req.query.cost;
-}
- if(req.query.feedback){
-    query.feedback=req.query.feedback;
-}
- if(req.query.frequency){
-    query.frequency=req.query.frequency;
-} 
- if(req.query.geolocation){
-    query.geolocation=req.query.geolocation;
-}
-    fault.find(query,(err, stats)=>{
-        if(err){
-            res.status(500)
-            return res.send(err);
-        }
-        res.status(201)
-       return res.json(stats);
-    });   
-       
-    } catch (err) {
-      res
-        .status(500)
-        .json({ message: "Something went wrong", error: err.message });
-    }
-  });
   
