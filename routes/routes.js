@@ -15,7 +15,7 @@ route.post("/comments/", createComments);
 
 route.post("/viewcomments/", viewComments);
 route.post("/rate/", createRate);
-route.post("/rate/", viewRate);
+route.post("/viewrate/", viewRate);
 
 route.post("/contribute/", Contribute);
 
