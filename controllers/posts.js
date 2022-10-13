@@ -32,15 +32,22 @@ export const viewComments = asyncWrapper(async (req, res) => {
     thread}= req.body
 
     try {
-      Comments.find({ thread: thread }, function (err, response) {
-        if(!response){
-          return res
-          .status(400)
-          .json({ message: "no comments found", error: err.message });
-        }
-        return res.json(response);
 
-      });
+      Comments.find((err, stats)=>{
+        if(err){
+            return res.send(err);
+        }
+       return res.json(stats);
+     });
+    //   Comments.find({ thread: thread }, function (err, response) {
+    //     if(!response){
+    //       return res
+    //       .status(400)
+    //       .json({ message: "no comments found", error: err.message });
+    //     }
+    //     return res.json(response);
+
+    //   });
 
       
        
