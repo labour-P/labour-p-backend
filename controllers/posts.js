@@ -30,15 +30,14 @@ import { asyncWrapper } from "../middlewares/async.js";
 export const viewComments = asyncWrapper(async (req, res) => {
   const {
     thread}= req.body
-    try {
-      const data= Comment.findOne({ thread: {thread} });
 
-            // if (!Comments){
-            //   res
-            //   .status(500)
-            //   .json({ message: "No Comments found" });
-            // }
-           return res.json(data);
+    try {
+      Comment.findOne({ thread: thread }, function (err, response) {
+        return res.json(response);
+
+      });
+
+      
        
     } catch (err) {
       res
@@ -50,16 +49,15 @@ export const viewComments = asyncWrapper(async (req, res) => {
 
   //view rating
   export const viewRate = asyncWrapper(async (req, res) => {
-    try {
-      const  Rate = await  Rate.findOne({ thread: req.body.thread });
-
-            if (!Rate){
-              res
-              .status(500)
-              .json({ message: "No Comments found" });
-            }
-           return res.json(Comments);
-      
+    const {
+      thread}= req.body
+  
+      try {
+        Rate.findOne({ thread: thread }, function (err, response) {
+          return res.json(response);
+  
+        });
+  
     } catch (err) {
       res
         .status(500)
@@ -71,12 +69,33 @@ export const viewComments = asyncWrapper(async (req, res) => {
 
 // make a ratting
 export const createRate = asyncWrapper(async (req, res) => {
+  const {
+    userid,
+    username,
+    name,
+    profileUrl,
+thread,
+location,
+date,
+time
+  }= req.body
   try {
-      const addRating= new Rate(req.body);
-      addRating.save();
-    res.status(201).json({ message: "Sucessfully liked a post" });
+      const addRate= new Rate({
+        userid,
+        username,
+        name,
+        profileUrl,
+    thread,
+    location,
+    date,
+    time
+        });
+        addRate.save();
+
+      //paystack integration goes here
+
+    res.status(201).json({ data : addRate, message: "Sucessfully  created a ratting" });
   
-     
   } catch (err) {
     res
       .status(500)
@@ -119,7 +138,7 @@ videourl
 
   }= req.body
   try {
-      const addComments= new Comments({userid,
+      const addComments= new Comment({
         userid,
     username,
     name,
@@ -136,7 +155,7 @@ videourl
 
       //paystack integration goes here
 
-    res.status(201).json({ message: "Sucessfully  created a comment" });
+    res.status(201).json({ data : addComments, message: "Sucessfully  created a comment" });
   
      
   } catch (err) {
