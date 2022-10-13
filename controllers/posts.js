@@ -32,22 +32,15 @@ export const viewComments = asyncWrapper(async (req, res) => {
     thread}= req.body
 
     try {
-
-      Comments.find((err, stats)=>{
-        if(err){
-            return res.send(err);
+      Comments.findOne({ thread: thread }, function (err, response) {
+        if(!response){
+          return res
+          .status(400)
+          .json({ message: "no comments found", error: err.message });
         }
-       return res.json(stats);
-     });
-    //   Comments.find({ thread: thread }, function (err, response) {
-    //     if(!response){
-    //       return res
-    //       .status(400)
-    //       .json({ message: "no comments found", error: err.message });
-    //     }
-    //     return res.json(response);
+        return res.json(response);
 
-    //   });
+      });
 
       
        
@@ -66,6 +59,11 @@ export const viewComments = asyncWrapper(async (req, res) => {
   
       try {
         Rate.findOne({ thread: thread }, function (err, response) {
+          if(!response){
+            return res
+            .status(400)
+            .json({ message: "no comments found", error: err.message });
+          }
           return res.json(response);
   
         });
