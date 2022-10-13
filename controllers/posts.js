@@ -2,7 +2,7 @@
 import Posts from "../models/posts.js";
 
 import Rate from "../models/rate.js";
-import Comment from "../models/comments.js";
+import Comments from "../models/comments.js";
 
 import { asyncWrapper } from "../middlewares/async.js";
 
@@ -32,7 +32,7 @@ export const viewComments = asyncWrapper(async (req, res) => {
     thread}= req.body
 
     try {
-       Comment.findOne({ thread: thread }, function (err, response) {
+      Comments.findOne({ thread: thread }, function (err, response) {
         if(!response){
           return res
           .status(400)
@@ -143,7 +143,7 @@ videourl
 
   }= req.body
   try {
-      const addComments= new Comment({
+      const addComments= new Comments({
         userid,
     username,
     name,
