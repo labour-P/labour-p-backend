@@ -32,7 +32,7 @@ export const viewComments = asyncWrapper(async (req, res) => {
     thread}= req.body
 
     try {
-       Comments.findOne({ thread: thread }, function (err, response) {
+       Comment.findOne({ thread: thread }, function (err, response) {
         if(!response){
           return res
           .status(400)
