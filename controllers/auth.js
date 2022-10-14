@@ -98,19 +98,16 @@ export const verifyUsername = asyncWrapper(async (req, res) => {
   
 export const signup = asyncWrapper(async (req, res) => {
   const {
-    firstName,
-    lastName,
-    userName,
-    email,
-    
+    name,
     password,
+    userName,
     phone,
-    
+    email,
     state,
     lga,
-    ward,
-    pollingUnit,
-    age,
+  ward,
+  pollingUnit,
+  age,
   } = req.body;
   try {
     const oldUser = await user.findOne({ email });
@@ -129,17 +126,17 @@ export const signup = asyncWrapper(async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const result = await user.create({
+      name,
       password: hashedPassword,
-      name: `${lastName} ${firstName}`,
       userName,
       phone,
       email,
-      
       state,
       lga,
     ward,
     pollingUnit,
-    age,
+    age
+    
     });
 
     // const token = jwt.sign({ email: result.email, id: result._id }, secret, {
@@ -234,8 +231,7 @@ export const resetPassword = asyncWrapper(async (req, res) => {
 
 export const update = asyncWrapper(async (req, res) => {
   const {
-    firstName,
-    lastName,
+    name,
     userName,
     email,
     password,

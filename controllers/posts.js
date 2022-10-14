@@ -6,6 +6,42 @@ import Comments from "../models/comments.js";
 
 import { asyncWrapper } from "../middlewares/async.js";
 
+
+import uploader from "../middlewares/multer.js";
+
+
+import cloudinary from "../middlewares/cloudinary.js";
+
+
+
+
+
+// app.post("/upload", uploader.single("file"), async (req, res) => {
+//   const upload = await cloudinary.v2.uploader.upload(req.file.path);
+//   return res.json({
+//     success: true,
+//     file: upload.secure_url,
+//   });
+// });
+
+
+export const fileuploader = asyncWrapper(uploader.single("file"), async (req, res) => {
+  try {
+   
+    const upload = await cloudinary.v2.uploader.upload(req.file.path);
+    return res.json({
+      success: true,
+      file: upload.secure_url,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: err.message });
+  }
+});
+
+
+
  //get all posts
  export const viewPosts = asyncWrapper(async (req, res) => {
     try {
@@ -90,22 +126,30 @@ date,
 time
   }= req.body
   try {
-      const addRate= new Rate({
-        userid,
-        username,
-        name,
-        profileUrl,
-    thread,
-    location,
-    date,
-    time
-        });
-        addRate.save();
 
-      //paystack integration goes here
-
-    res.status(201).json({ data : addRate, message: "Sucessfully  created a ratting" });
-  
+    const usernameexist = await user.findOne({ username });
+      
+      if (usernameexist ){
+        Rate.findOneAndDelete({ username:  username });
+      
+        return res.status(400).json({ message: "You have unliked this post" });
+      }else{
+        const addRate= new Rate({
+          userid,
+          username,
+          name,
+          profileUrl,
+          thread,
+          location,
+          date,
+          time
+          });
+          addRate.save();
+        res
+          .status(200)
+          .json({ message: "Something went wrong", error: err.message });
+        }
+   
   } catch (err) {
     res
       .status(500)
