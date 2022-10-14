@@ -127,7 +127,7 @@ time
   }= req.body
   try {
 
-    const usernameexist = await user.findOne({ username });
+    const usernameexist = await Rate.findOne({ username });
       
       if (usernameexist ){
         Rate.findOneAndDelete({ username:  username });
