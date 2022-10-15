@@ -170,13 +170,26 @@ return result;
 export const forgetPassword = asyncWrapper(async (req, res) => {
   try {
 
-    const user = await Usermod.findOne({ email: req.body.email });
+    const user = await Usermod.findOne({ phone: req.body.phone });
 
     if (!user) {
       return res.status(400).json({
-        message: `we couldnt find a user with this email -${req.body.email}`,
+        message: `we couldnt find a user with this email -${req.body.phone}`,
       });
-    }
+    }else{
+      const text= "your otp is:";
+      const token= "123567";
+      const phonenum=req.body.phone;
+const message={
+token,phonenum,text
+};
+console.log(phonenum);
+      sms({message});
+      return res.status(200).json({
+        message: 'token sent to this phone ',
+        token:token
+    });
+  }
 
     // let token = await Token.findOne({ userId: Usermod._Id });
 
