@@ -1,5 +1,5 @@
 
-import Posts from "../models/posts.js";
+import Postsmod from "../models/posts.js";
 
 import Rate from "../models/rate.js";
 import Comments from "../models/comments.js";
@@ -46,7 +46,7 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
  export const viewPosts = asyncWrapper(async (req, res) => {
     try {
      
-        Posts.find((err, stats)=>{
+        Postsmod.find((err, stats)=>{
             if(err){
                 return res.send(err);
             }
@@ -132,7 +132,7 @@ export const createRate = asyncWrapper(async (req, res) => {
         
         const deleted = await Rate.findByIdAndDelete({ _id: usernameexist._id });
         const all= await Rate.find();
-        const updated = await Posts.findOneAndUpdate({ thread: usernameexist.thread, rate: all});
+        const updated = await Postsmod.findOneAndUpdate({ thread: usernameexist.thread, rate: all});
 
 
 
@@ -150,7 +150,7 @@ export const createRate = asyncWrapper(async (req, res) => {
           });
           await addRate.save();
           const all= await Rate.find();
-          const updated = await Posts.findOneAndUpdate({ thread: thread, rate: all});
+          const updated = await Postsmod.findOneAndUpdate({ thread: thread, rate: all});
   
         res
           .status(200)
@@ -168,7 +168,7 @@ export const createRate = asyncWrapper(async (req, res) => {
 
 export const createPosts = asyncWrapper(async (req, res) => {
     try {
-        const addPosts= new Posts(req.body);
+        const addPosts= new Postsmod(req.body);
         addPosts.save();
       res.status(201).json({ message: "Sucessfully added your post" });
     
@@ -214,7 +214,7 @@ videourl
         });
       addComments.save();
       const all= await Comments.find();
-      const updated = await Posts.findOneAndUpdate({ thread: thread, comment: all});
+      const updated = await Postsmod.findOneAndUpdate({ thread: thread, comment: all});
 
       
 
