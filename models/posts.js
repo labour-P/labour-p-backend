@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const PostSchemamodel = mongoose.Schema({
+const PostSchemamod = mongoose.Schema({
   userid: { type: String, required: true},
   username: { type: String, required: true},
   name: { type: String, required: true},
@@ -16,6 +16,6 @@ const PostSchemamodel = mongoose.Schema({
   videourl: {  },
 });
 
-export default mongoose.model("Posts", PostSchemamodel);
+export default mongoose.model("Posts", PostSchemamod);
 
 
