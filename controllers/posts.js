@@ -151,7 +151,10 @@ export const createRate = asyncWrapper(async (req, res) => {
           await addRate.save();
           const all= await Rate.find({thread:thread});
 
-          const updated = await Postsmo.findAndUpdate({ thread: thread, rate: Object.keys(all).length});
+          const updated = await Postsmo.find({ thread: thread});
+            
+           updated.rate = Object.keys(all).length;
+          await updated.save();
   
         res
           .status(200)
