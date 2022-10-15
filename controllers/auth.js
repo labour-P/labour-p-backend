@@ -173,21 +173,22 @@ export const forgetPassword = asyncWrapper(async (req, res) => {
       });
     }
 
-    let token = await Token.findOne({ userId: user._Id });
+    // let token = await Token.findOne({ userId: user._Id });
 
-    if (!token) {
-      token = await new Token({
-        userId: user._id,
-        resetPasswordToken: crypto.randomBytes(20).toString("hex"),
-      }).save();
-    }
+    // if (!token) {
+    //   token = await new Token({
+    //     userId: user._id,
+    //     resetPasswordToken: crypto.randomBytes(20).toString("hex"),
+    //   }).save();
+    // }
 
-    const link = `https://labourp.com/passwordreset/?token=${token.resetPasswordToken}&id=${user._id}&email=${req.body.email}`;
+    // const link = `https://labourp.com/passwordreset/?token=${token.resetPasswordToken}&id=${user._id}&email=${req.body.email}`;
 
-    forgetPassword(user.email, link);
-    return res.status(200).json({
-      message: `a link has been sent to your email -${req.body.email}`,
-    });
+    // forgetPassword(user.email, link);
+
+    // return res.status(200).json({
+    //   message: `a link has been sent to your email -${req.body.email}`,
+    // });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
@@ -211,12 +212,16 @@ export const checkResetLink = asyncWrapper(async (req, res) => {
 
 
 export const resetPassword = asyncWrapper(async (req, res) => {
+  const
+  {phone,
+  password}=req.body;
   try {
-    const user = await user.findOne({ _id: req.body.id });
+    const user = await user.findOne({ phone: phone });
 
     if (!user) return res.status(404).json({ message: "user does not exist" });
 
-    const hashedpassword = await bcrypt.hash(req.body.password, 12);
+    
+    const hashedpassword = await bcrypt.hash(password, 12);
 
     user.password = hashedpassword;
     user.save();
