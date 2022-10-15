@@ -149,7 +149,7 @@ export const createRate = asyncWrapper(async (req, res) => {
           time
           });
           await addRate.save();
-          const all= await Rate.find();
+          const all= await Rate.find({thread:thread});
 
           const updated = await Postsmo.findOneAndUpdate({ thread: thread, rate: Object.keys(all).length});
   
@@ -215,7 +215,8 @@ videourl
         });
       addComments.save();
       const all= await Comments.find({thread: thread});
-      const updated = await Postsmo.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
+
+      const updated = await Postsmo.findAndUpdate({ thread: thread, comment: Object.keys(all).length});
 
       
 
