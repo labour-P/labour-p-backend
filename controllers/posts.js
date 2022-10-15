@@ -214,7 +214,7 @@ videourl
         });
       addComments.save();
       const all= await Comments.find();
-      const updated = await Posts.findOneAndUpdate({ thread: usernameexist.thread, comment: all});
+      const updated = await Posts.findOneAndUpdate({ thread: thread, comment: all});
 
       
 
