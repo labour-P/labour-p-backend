@@ -1,7 +1,7 @@
 import { asyncWrapper } from "../middlewares/async.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import user from "../models/user.js";
+import Usermod from "../models/user.js";
 import Token from "../models/Token.js";
 import  {sms} from "../middlewares/sms.js";
 
@@ -14,7 +14,7 @@ export const signin = asyncWrapper(async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const oldUser = await user.findOne({ email });
+    const oldUser = await Usermod.findOne({ email });
 
     if (!oldUser)
       return res.status(404).json({ message: "User doesn't exist" });
@@ -49,8 +49,8 @@ export const verifyAccount = asyncWrapper(async (req, res) => {
         console.log(phone);
         console.log(email);
         
-      const emailexist = await user.findOne({ email });
-      const phoneexist = await user.findOne({ phone });
+      const emailexist = await Usermod.findOne({ email });
+      const phoneexist = await Usermod.findOne({ phone });
       if (emailexist || phoneexist ){
         res.status(400).json({ message: "User already exists" });
       }else{
@@ -80,7 +80,7 @@ console.log(phonenum);
 export const verifyUsername = asyncWrapper(async (req, res) => {
   const {username} = req.body;
     try {
-      const usernameexist = await user.findOne({ username });
+      const usernameexist = await Usermod.findOne({ username });
       
       if (usernameexist ){
         return res.status(400).json({ message: "User already exists" });
@@ -110,9 +110,9 @@ export const signup = asyncWrapper(async (req, res) => {
   age,
   } = req.body;
   try {
-    const oldUser = await user.findOne({ email });
-    const oldUserphone = await user.findOne({ phone });
-    const oldUsername = await user.findOne({ userName });
+    const oldUser = await Usermod.findOne({ email });
+    const oldUserphone = await Usermod.findOne({ phone });
+    const oldUsername = await Usermod.findOne({ userName });
 
     if (oldUsername)
     return res.status(400).json({ message: "User already exists" });
@@ -165,7 +165,7 @@ return result;
 export const forgetPassword = asyncWrapper(async (req, res) => {
   try {
 
-    const user = await user.findOne({ email: req.body.email });
+    const user = await Usermod.findOne({ email: req.body.email });
 
     if (!user) {
       return res.status(400).json({
@@ -216,7 +216,7 @@ export const resetPassword = asyncWrapper(async (req, res) => {
   {phone,
   password}=req.body;
   try {
-    const user = await user.findOne({ phone: phone });
+    const user = await Usermod.findOne({ phone: phone });
 
     if (!user) return res.status(404).json({ message: "user does not exist" });
 
@@ -248,7 +248,7 @@ export const update = asyncWrapper(async (req, res) => {
     age,
   } = req.body;
   try {
-    const user = await user.findOne({ _id: req.body.id });
+    const user = await Usermod.findOne({ _id: req.body.id });
 
     if (!user) return res.status(404).json({ message: "user does not exist" });
 

@@ -16,6 +16,6 @@ const UsersSchemamodel = mongoose.Schema({
   age: { type: String, required: true },
 });
 
-export default mongoose.model("User", UsersSchemamodel);
+export default mongoose.model("Usermod", UsersSchemamodel);
 
 
