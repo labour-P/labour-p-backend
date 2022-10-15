@@ -125,7 +125,7 @@ export const signup = asyncWrapper(async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const result = await user.create({
+    const result = await Usermod.create({
       name,
       password: hashedPassword,
       userName,
@@ -173,18 +173,18 @@ export const forgetPassword = asyncWrapper(async (req, res) => {
       });
     }
 
-    // let token = await Token.findOne({ userId: user._Id });
+    // let token = await Token.findOne({ userId: Usermod._Id });
 
     // if (!token) {
     //   token = await new Token({
-    //     userId: user._id,
+    //     userId: Usermod._id,
     //     resetPasswordToken: crypto.randomBytes(20).toString("hex"),
     //   }).save();
     // }
 
-    // const link = `https://labourp.com/passwordreset/?token=${token.resetPasswordToken}&id=${user._id}&email=${req.body.email}`;
+    // const link = `https://labourp.com/passwordreset/?token=${token.resetPasswordToken}&id=${Usermod._id}&email=${req.body.email}`;
 
-    // forgetPassword(user.email, link);
+    // forgetPassword(Usermod.email, link);
 
     // return res.status(200).json({
     //   message: `a link has been sent to your email -${req.body.email}`,
@@ -223,8 +223,8 @@ export const resetPassword = asyncWrapper(async (req, res) => {
     
     const hashedpassword = await bcrypt.hash(password, 12);
 
-    user.password = hashedpassword;
-    user.save();
+    Usermod.password = hashedpassword;
+    Usermod.save();
     return res.status(200).json({ message: "password changed successfully" });
   } catch (err) {
     res
@@ -254,8 +254,8 @@ export const update = asyncWrapper(async (req, res) => {
 
     const hashedpassword = await bcrypt.hash(req.body.password, 12);
 
-    user.password = hashedpassword;
-    user.save();
+    Usermod.password = hashedpassword;
+    Usermod.save();
     return res.status(200).json({ message: "password changed successfully" });
   } catch (err) {
     res
