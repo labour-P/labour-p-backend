@@ -91,7 +91,7 @@ export const viewComments = asyncWrapper(async (req, res) => {
   //view rating
   export const viewRate = asyncWrapper(async (req, res) => {
     const {
-      thread}= req.body
+       thread}= req.body
   
       try {
         Rate.find({ thread: thread }, function (err, response) {
@@ -120,21 +120,25 @@ export const createRate = asyncWrapper(async (req, res) => {
     username,
     name,
     profileUrl,
-thread,
-location,
-date,
-time
+    thread,
+    location,
+    date,
+    time
   }= req.body
   try {
 
-    const usernameexist = await Rate.findOne({ username });
-      
+    const usernameexist = await Rate.findOne({ username: username });
       if (usernameexist ){
-        Rate.findOneAndDelete({ username:  username });
-      
-        return res.status(400).json({ message: "You have unliked this post" });
+        
+        const deleted = await Rate.findByIdAndDelete({ _id: usernameexist._id });
+        const all= await Rate.find();
+        const updated = await Posts.findByIdAndUpdate({ thread: usernameexist.thread, rate: all});
+
+
+
+        return res.status(200).json({ message: "You have unliked this post", response: usernameexist, count: Object.keys(all).length  });
       }else{
-        const addRate= new Rate({
+        const addRate=new Rate({
           userid,
           username,
           name,
@@ -144,10 +148,13 @@ time
           date,
           time
           });
-          addRate.save();
+          await addRate.save();
+          const all= await Rate.find();
+          const updated = await Posts.findByIdAndUpdate({ thread: usernameexist.thread, rate: all});
+  
         res
           .status(200)
-          .json({ message: "Something went wrong", error: err.message });
+          .json({ message: "You have liked this post", response: addRate, count: Object.keys(all).length });
         }
    
   } catch (err) {
@@ -206,10 +213,12 @@ imageurl,
 videourl
         });
       addComments.save();
+      const all= await Comments.find();
+      const updated = await Posts.findByIdAndUpdate({ thread: usernameexist.thread, comment: all});
 
-      //paystack integration goes here
+      
 
-    res.status(201).json({ data : addComments, message: "Sucessfully  created a comment" });
+    res.status(201).json({ message: "Sucessfully  created a comment", data : addComments, message: "Sucessfully  created a comment", count: all });
   
      
   } catch (err) {
