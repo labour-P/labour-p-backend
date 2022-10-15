@@ -4,8 +4,13 @@ import jwt from "jsonwebtoken";
 import Usermod from "../models/user.js";
 import Token from "../models/Token.js";
 import  {sms} from "../middlewares/sms.js";
+import uploader from "../middlewares/multer.js";
 
-// import { verifyemail, forgotPassword, signupSuccess } from "../mail/mailgun.js";
+
+import cloudinary from "../middlewares/cloudinary.js";
+
+
+// import { verifyemail, forgotPassword, signupSuccess } from "../mail/mailgit pullgun.js";
 //import { createCustomAPIError } from "../errors/custom-error";
 
 const secret = "myawesome-secret";
@@ -263,3 +268,51 @@ export const update = asyncWrapper(async (req, res) => {
       .json({ message: "something went wrong", error: err.message });
   }
 });
+
+
+
+
+
+
+
+
+// app.post("/upload", uploader.single("file"), async (req, res) => {
+//   const upload = await cloudinary.v2.uploader.upload(req.file.path);
+//   return res.json({
+//     success: true,
+//     file: upload.secure_url,
+//   });
+// });
+
+
+
+
+
+export const updateProfile = asyncWrapper(uploader.single("file"), async (req, res) => {
+
+  
+  try {
+   
+    const upload = await cloudinary.v2.uploader.upload(req.file.path);
+
+    const user = await Usermod.findOne({ _id: req.body.id });
+
+    if (!user) return res.status(404).json({ message: "user does not exist" });
+
+    Usermod.profileUrl = upload.secure_url;
+    Usermod.save();
+    return res
+    .status(200)
+    .json({
+      success: true,
+      file: upload.secure_url,
+      message: "profile picture uploaded successfully"
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: err });
+  }
+});
+
+   

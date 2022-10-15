@@ -132,7 +132,7 @@ export const createRate = asyncWrapper(async (req, res) => {
         
         const deleted = await Rate.findByIdAndDelete({ _id: usernameexist._id });
         const all= await Rate.find();
-        const updated = await Postsmod.findOneAndUpdate({ thread: usernameexist.thread, rate: all});
+        const updated = await Postsmod.findOneAndUpdate({ thread: usernameexist.thread, rate: Object.keys(all).length});
 
 
 
@@ -150,7 +150,8 @@ export const createRate = asyncWrapper(async (req, res) => {
           });
           await addRate.save();
           const all= await Rate.find();
-          const updated = await Postsmod.findOneAndUpdate({ thread: thread, rate: all});
+
+          const updated = await Postsmod.findOneAndUpdate({ thread: thread, rate: Object.keys(all).length});
   
         res
           .status(200)
@@ -214,7 +215,7 @@ videourl
         });
       addComments.save();
       const all= await Comments.find();
-      const updated = await Postsmod.findOneAndUpdate({ thread: thread, comment: all});
+      const updated = await Postsmod.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
 
       
 

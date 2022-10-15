@@ -9,6 +9,7 @@ import {
   resetPassword,
   verifyAccount,
   verifyUsername,
+  updateProfile,
 } from "../controllers/auth.js";
 
 
@@ -24,8 +25,9 @@ router.post("/verifyUsername", verifyUsername);
 // router.post("/getWard", getWard);
 
 router.post("/forgotpassword", forgetPassword);
-router.patch("/resetpassword", resetPassword);
-router.patch("/update", update);
+router.post("/resetpassword", resetPassword);
+router.post("/updateprofile", updateProfile);
+router.post("/update", update);
 
 
 
