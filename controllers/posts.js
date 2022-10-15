@@ -132,7 +132,7 @@ export const createRate = asyncWrapper(async (req, res) => {
         
         const deleted = await Rate.findByIdAndDelete({ _id: usernameexist._id });
         const all= await Rate.find({thread: thread});
-        const updated = await Postsmo.findOneAndUpdate({ thread: usernameexist.thread, rate: Object.keys(all).length});
+        const updated = await Postsmo.findAndUpdate({ thread: usernameexist.thread, rate: Object.keys(all).length});
 
 
 
@@ -151,7 +151,7 @@ export const createRate = asyncWrapper(async (req, res) => {
           await addRate.save();
           const all= await Rate.find({thread:thread});
 
-          const updated = await Postsmo.findOneAndUpdate({ thread: thread, rate: Object.keys(all).length});
+          const updated = await Postsmo.findAndUpdate({ thread: thread, rate: Object.keys(all).length});
   
         res
           .status(200)
