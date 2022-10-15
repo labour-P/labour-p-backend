@@ -131,7 +131,7 @@ export const createRate = asyncWrapper(async (req, res) => {
       if (usernameexist ){
         
         const deleted = await Rate.findByIdAndDelete({ _id: usernameexist._id });
-        const all= await Rate.find();
+        const all= await Rate.find({thread: thread});
         const updated = await Postsmo.findOneAndUpdate({ thread: usernameexist.thread, rate: Object.keys(all).length});
 
 
@@ -214,7 +214,7 @@ imageurl,
 videourl
         });
       addComments.save();
-      const all= await Comments.find();
+      const all= await Comments.find({thread: thread});
       const updated = await Postsmo.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
 
       
