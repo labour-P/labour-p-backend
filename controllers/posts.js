@@ -1,5 +1,5 @@
 
-import Postsmod from "../models/posts.js";
+import Postsmo from "../models/posts.js";
 
 import Rate from "../models/rate.js";
 import Comments from "../models/comments.js";
@@ -46,7 +46,7 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
  export const viewPosts = asyncWrapper(async (req, res) => {
     try {
      
-        Postsmod.find((err, stats)=>{
+        Postsmo.find((err, stats)=>{
             if(err){
                 return res.send(err);
             }
@@ -132,7 +132,7 @@ export const createRate = asyncWrapper(async (req, res) => {
         
         const deleted = await Rate.findByIdAndDelete({ _id: usernameexist._id });
         const all= await Rate.find();
-        const updated = await Postsmod.findOneAndUpdate({ thread: usernameexist.thread, rate: Object.keys(all).length});
+        const updated = await Postsmo.findOneAndUpdate({ thread: usernameexist.thread, rate: Object.keys(all).length});
 
 
 
@@ -151,7 +151,7 @@ export const createRate = asyncWrapper(async (req, res) => {
           await addRate.save();
           const all= await Rate.find();
 
-          const updated = await Postsmod.findOneAndUpdate({ thread: thread, rate: Object.keys(all).length});
+          const updated = await Postsmo.findOneAndUpdate({ thread: thread, rate: Object.keys(all).length});
   
         res
           .status(200)
@@ -169,7 +169,7 @@ export const createRate = asyncWrapper(async (req, res) => {
 
 export const createPosts = asyncWrapper(async (req, res) => {
     try {
-        const addPosts= new Postsmod(req.body);
+        const addPosts= new Postsmo(req.body);
         addPosts.save();
       res.status(201).json({ message: "Sucessfully added your post" });
     
@@ -215,7 +215,7 @@ videourl
         });
       addComments.save();
       const all= await Comments.find();
-      const updated = await Postsmod.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
+      const updated = await Postsmo.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
 
       
 

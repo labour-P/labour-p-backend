@@ -16,6 +16,6 @@ const PostSchemamod = mongoose.Schema({
   videourl: {  },
 });
 
-export default mongoose.model("Postsmod", PostSchemamod);
+export default mongoose.model("Postsmo", PostSchemamod);
 
 
