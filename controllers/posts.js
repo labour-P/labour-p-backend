@@ -150,7 +150,7 @@ export const createRate = asyncWrapper(async (req, res) => {
           });
           await addRate.save();
           const all= await Rate.find();
-          const updated = await Posts.findOneAndUpdate({ thread: usernameexist.thread, rate: all});
+          const updated = await Posts.findOneAndUpdate({ thread: thread, rate: all});
   
         res
           .status(200)
