@@ -136,7 +136,7 @@ export const createRate = asyncWrapper(async (req, res) => {
         const updated = await Postsmo.find({ thread: usernameexist.thread});
             
         updated.rate = Object.keys(all).length;
-       await updated.save();
+       await Postsmo.save();
 
 
 
@@ -158,7 +158,7 @@ export const createRate = asyncWrapper(async (req, res) => {
           const updated = await Postsmo.find({ thread: thread});
             
            updated.rate = Object.keys(all).length;
-          await updated.save();
+          await Postsmo.save();
   
         res
           .status(200)
