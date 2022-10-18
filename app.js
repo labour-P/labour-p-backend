@@ -25,6 +25,7 @@ app.use(bodyparser.json());
 
 app.use("/api/auth", auth);
 app.use("/api/routes", routes);
+app.use("/api/admin", routes);
 
 
 app.get("/", function(req, res){

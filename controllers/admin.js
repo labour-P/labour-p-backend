@@ -1,5 +1,5 @@
 
-import Postsmo from "../models/posts.js";
+import adminPosts from "../models/admin.js";
 
 import Rate from "../models/rate.js";
 import Comments from "../models/comments.js";
@@ -49,7 +49,7 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
       const norate= await Comments.find({thread: thread});
 
 
-        Postsmo.find((err, stats)=>{
+        adminPosts.find((err, stats)=>{
             if(err){
                 return res.send(err);
             }
@@ -135,7 +135,7 @@ export const createRate = asyncWrapper(async (req, res) => {
         
         const deleted = await Rate.findByIdAndDelete({ _id: usernameexist._id });
         const all= await Rate.find({thread: thread});
-        const updated = await Postsmo.findOneAndUpdate({ thread: usernameexist.thread, rate: Object.keys(all).length});
+        const updated = await adminPosts.findOneAndUpdate({ thread: usernameexist.thread, rate: Object.keys(all).length});
 
 
 
@@ -154,7 +154,7 @@ export const createRate = asyncWrapper(async (req, res) => {
           await addRate.save();
           const all= await Rate.find({thread:thread});
 
-          const updated = await Postsmo.findOneAndUpdate({ thread: thread, rate: Object.keys(all).length});
+          const updated = await adminPosts.findOneAndUpdate({ thread: thread, rate: Object.keys(all).length});
   
         res
           .status(200)
@@ -172,7 +172,7 @@ export const createRate = asyncWrapper(async (req, res) => {
 
 export const createPosts = asyncWrapper(async (req, res) => {
     try {
-        const addPosts= new Postsmo(req.body);
+        const addPosts= new adminPosts(req.body);
         addPosts.save();
       res.status(201).json({ message: "Sucessfully added your post" });
     
@@ -218,7 +218,7 @@ videourl
         });
       addComments.save();
       const all= await Comments.find({thread: thread});
-      const updated = await Postsmo.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
+      const updated = await adminPosts.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
 
       
 

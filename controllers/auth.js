@@ -256,9 +256,6 @@ export const update = asyncWrapper(async (req, res) => {
   const {
     name,
     userName,
-    email,
-    password,
-    phone,
     state,
     lga,
     ward,
@@ -270,11 +267,15 @@ export const update = asyncWrapper(async (req, res) => {
 
     if (!user) return res.status(404).json({ message: "user does not exist" });
 
-    const hashedpassword = await bcrypt.hash(req.body.password, 12);
-
-    Usermod.password = hashedpassword;
+    Usermod.name= name;
+    Usermod.userName= userName;
+    Usermod.state= state;
+    Usermod.lga=  lga;
+    Usermod.ward= ward;
+    Usermod.pollingUnit= pollingUnit;
+    Usermod.age=  age;
     Usermod.save();
-    return res.status(200).json({ message: "password changed successfully" });
+    return res.status(200).json({ message: "profile update successfully" });
   } catch (err) {
     res
       .status(500)

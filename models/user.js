@@ -1,11 +1,14 @@
 import mongoose from "mongoose";
 
-const UsersSchemamodel = mongoose.Schema({
+const UsersSchemamode = mongoose.Schema({
   name: { type: String, required: true },
   phone: { type: String, required: true },
   email: { type: String, required: true },
   userName: { type: String, required: true },
   profileUrl: { },
+  role: { type: String,
+    enum: [ "0", "1"],
+    default: "0",},
   password: { type: String, required: true },
   address: { type: String},
   city: { type: String},
@@ -16,6 +19,6 @@ const UsersSchemamodel = mongoose.Schema({
   age: { type: String, required: true },
 });
 
-export default mongoose.model("Usermod", UsersSchemamodel);
+export default mongoose.model("Usermod", UsersSchemamode);
 
 
