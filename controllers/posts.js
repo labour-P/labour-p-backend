@@ -50,11 +50,11 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
             if(err){
                 return res.send(err);
             }
-            stats.array.forEach(element => {
-              console.log(element);
-            //   const noComment= await Comments.find({thread: thread});
-            // const noRate= await Rate.find({thread: thread});
-            });
+            // stats.array.forEach(element => {
+            //   console.log(element);
+            // //   const noComment= await Comments.find({thread: thread});
+            // // const noRate= await Rate.find({thread: thread});
+            // });
 
            return res.json(stats);
         });
