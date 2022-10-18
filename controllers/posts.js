@@ -11,6 +11,7 @@ import uploader from "../middlewares/multer.js";
 
 
 import cloudinary from "../middlewares/cloudinary.js";
+import posts from "../models/posts.js";
 
 
 
@@ -45,14 +46,16 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
  //get all posts
  export const viewPosts = asyncWrapper(async (req, res) => {
     try {
-      const nocomment= await Comments.find({thread: thread});
-      const norate= await Comments.find({thread: thread});
-
-
         Postsmo.find((err, stats)=>{
             if(err){
                 return res.send(err);
             }
+            stats.array.forEach(element => {
+              console.log(element);
+            //   const noComment= await Comments.find({thread: thread});
+            // const noRate= await Rate.find({thread: thread});
+            });
+
            return res.json(stats);
         });
     } catch (err) {
