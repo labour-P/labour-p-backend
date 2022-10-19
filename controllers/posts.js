@@ -84,6 +84,7 @@ export const viewComments = asyncWrapper(async (req, res) => {
           .status(400)
           .json({ message: "no comments found", error: err.message });
         }
+
         return res.json(response);
 
       });
