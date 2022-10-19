@@ -236,8 +236,11 @@ export const resetPassword = asyncWrapper(async (req, res) => {
   try {
     const user = await Usermod.findOne({ phone: phone });
 
-    if (!user) return res.status(404).json({ message: "user does not exist" });
-
+    if (!user) {
+      return res
+      .status(404)
+      .json({ message: "user does not exist" });
+  }
     
     const hashedpassword = await bcrypt.hash(password, 12);
 
@@ -245,7 +248,7 @@ export const resetPassword = asyncWrapper(async (req, res) => {
     Usermod.save();
     return res.status(200).json({ message: "password changed successfully" });
   } catch (err) {
-    res
+    return res
       .status(500)
       .json({ message: "something went wrong", error: err.message });
   }
