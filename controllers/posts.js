@@ -224,12 +224,12 @@ imageurl,
 videourl
         });
       addComments.save();
-      const all= await Comments.find({thread: thread});
-      const updated = await Postsmo.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
+      // const all= await Comments.find({thread: thread});
+      // const updated = await Postsmo.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
 
       
 
-    res.status(201).json({ message: "Sucessfully  created a comment", data : addComments, message: "Sucessfully  created a comment", count: all });
+    res.status(201).json({ message: "Sucessfully  created a comment", data : addComments, message: "Sucessfully  created a comment" });
   
      
   } catch (err) {
