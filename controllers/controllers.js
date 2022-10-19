@@ -1,7 +1,7 @@
 
 import donation from "../models/donations.js";
 import contribution from "../models/contribution.js";
-import got from got;
+import got from 'got';
 
 import { asyncWrapper } from "../middlewares/async.js";
 
@@ -96,7 +96,7 @@ export const donate = asyncWrapper(async (req, res) => {
           },
           customizations: {
               title: "MY TIME,MY VOTE, MY MONEY   OBIDATTI FOREVER   LABOUR PARTY FORWARD EVER",
-              logo: "http://www.piedpiper.com/app/themes/joystick-v27/images/logo.png"
+              logo: "http://figma.com/file/kwufaeqh054s5l68b2ekqT/The-Labor-P-Project?node-id=23%3A3843"
           }
       }
   }).json();
