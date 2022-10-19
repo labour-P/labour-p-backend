@@ -69,16 +69,17 @@ export const Contribute = asyncWrapper(async (req, res) => {
 
   
 export const donate = asyncWrapper(async (req, res) => {
-  try {
-    const {
-      tx_ref,
-      amount,
-      email,
-      phone,
-      name,
-      redirect_url
+  const {
+    tx_ref,
+    amount,
+    email,
+    phone,
+    name,
+    redirect_url
 
-    }=req.body;
+  }=req.body;
+  try {
+    
       //integration
   const response = await got.post("https://api.flutterwave.com/v3/payments", {
       headers: {
