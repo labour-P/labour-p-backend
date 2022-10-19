@@ -1,6 +1,7 @@
 
 import donation from "../models/donations.js";
 import contribution from "../models/contribution.js";
+import got from got;
 
 import { asyncWrapper } from "../middlewares/async.js";
 
@@ -69,29 +70,32 @@ export const Contribute = asyncWrapper(async (req, res) => {
   
 export const donate = asyncWrapper(async (req, res) => {
   try {
-      const adddonation= new donation(req.body);
-      adddonation.save();
+    const {
+      tx_ref,
+      amount,
+      email,
+      phone,
+      name,
+      redirect_url
+
+    }=req.body;
       //integration
   const response = await got.post("https://api.flutterwave.com/v3/payments", {
       headers: {
-          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`
+          Authorization: `Bearer FLWSECK_TEST-8060b971652556328570db6c18a1edab-X`
       },
       json: {
-          tx_ref: "hooli-tx-1920bbtytty",
-          amount: "100",
+          tx_ref: tx_ref,
+          amount: amount,
           currency: "NGN",
-          redirect_url: "https://webhook.site/9d0b00ba-9a69-44fa-a43d-a82c33c36fdc",
-          meta: {
-              consumer_id: 23,
-              consumer_mac: "92a3-912ba-1192a"
-          },
+          redirect_url: redirect_url,
           customer: {
-              email: "user@gmail.com",
-              phonenumber: "080****4528",
-              name: "Yemi Desola"
+              email: email,
+              phonenumber: phone,
+              name: name
           },
           customizations: {
-              title: "Pied Piper Payments",
+              title: "MY TIME,MY VOTE, MY MONEY   OBIDATTI FOREVER   LABOUR PARTY FORWARD EVER",
               logo: "http://www.piedpiper.com/app/themes/joystick-v27/images/logo.png"
           }
       }
@@ -118,8 +122,18 @@ export const paymentcallback = asyncWrapper(async (req, res) => {
           && response.data.amount === transactionDetails.amount
           && response.data.currency === "NGN") {
           // Success! Confirm the customer's payment
+          const adddonation= new donation(req.body);
+          adddonation.save();
+          res
+          .status(200)
+          .json({ message: "donation recieved" });
+      
       } else {
           // Inform the customer their payment was unsuccessful
+          res
+          .status(400)
+          .json({ message: "payment not succesful", error: err.message });
+      
       }
   }
 

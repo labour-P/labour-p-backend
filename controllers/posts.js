@@ -254,7 +254,7 @@ thread }= req.body
       const all2= await Rate.find({thread: thread});
 
 
-    res.status(201).json({ message: "Sucessfully fectched  ",thread: thread, countComment: Object.keys(all).length , countRate: Object.keys(all2).length });
+    res.status(201).json({ msg: "Sucessfully fectched",thread: thread, countComment: Object.keys(all).length , countRate: Object.keys(all2).length });
   
      
   } catch (err) {
