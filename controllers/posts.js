@@ -46,18 +46,22 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
  //get all posts
  export const viewPosts = asyncWrapper(async (req, res) => {
     try {
-        Postsmo.find((err, stats)=>{
+       const model= Postsmo.find((err, stats)=>{
             if(err){
                 return res.send(err);
             }
-            // stats.array.forEach(element => {
+            // stats.forEach(element => {
             //   console.log(element);
             // //   const noComment= await Comments.find({thread: thread});
             // // const noRate= await Rate.find({thread: thread});
             // });
+            // const obj =Object.values(stats.thread);
+
+            // console.log(obj);
 
            return res.json(stats);
         });
+        
     } catch (err) {
       res
         .status(500)
@@ -236,3 +240,47 @@ videourl
 });
 
   
+ 
+export const noComments = asyncWrapper(async (req, res) => {
+  const {
+  
+thread }= req.body
+  try {
+      
+      const all= await Comments.find({thread: thread});
+      // const updated = await Postsmo.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
+
+      
+
+    res.status(201).json({ message: "Sucessfully fectched number of comments ", count: Object.keys(all).length });
+  
+     
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: err.message });
+  }
+});
+
+
+export const noRate = asyncWrapper(async (req, res) => {
+  const {
+  
+thread }= req.body
+  try {
+      
+      const all= await Rate.find({thread: thread});
+
+      
+
+    res.status(201).json({ message: "Sucessfully fectched number of rate ", count: Object.keys(all).length });
+  
+     
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: err.message });
+  }
+});
+
+ 

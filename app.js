@@ -6,6 +6,7 @@ import errorHandler from "./middlewares/error-handler.js";
 //routes
 import routes from "./routes/routes.js";
 import auth from "./routes/auth.js";
+import admin from "./routes/admin.js";
 
 
 import bodyparser from "body-parser";
@@ -25,7 +26,7 @@ app.use(bodyparser.json());
 
 app.use("/api/auth", auth);
 app.use("/api/routes", routes);
-app.use("/api/admin", routes);
+app.use("/api/admin", admin);
 
 
 app.get("/", function(req, res){

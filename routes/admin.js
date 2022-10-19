@@ -3,32 +3,32 @@ import {createPosts,viewPosts,createComments, viewComments, createRate, viewRate
 import {Contribute,getContribute,getdonate, donate } from "../controllers/controllers.js";
 import {watsapp } from "../controllers/watsapp.js";
 
-const route = express.Router();
+const admin = express.Router();
 
 
-route.post("/posts/", createPosts);
-route.get("/posts/", viewPosts);
-
-
-
-
-// route.post("/comments/", createComments);
-
-// route.post("/viewcomments/", viewComments);
-// route.post("/rate/", createRate);
-// route.post("/viewrate/", viewRate);
-
-// route.post("/contribute/", Contribute);
-
-// route.get("/contribute/", getContribute);
-
-
-// route.post("/donate/", donate);
-
-// route.get("/donate/", getdonate);
-
-// route.post("/watsapp/", watsapp);
+admin.post("/posts/", createPosts);
+admin.get("/posts/", viewPosts);
 
 
 
-export default route;
+
+// admin.post("/comments/", createComments);
+
+// admin.post("/viewcomments/", viewComments);
+// admin.post("/rate/", createRate);
+// admin.post("/viewrate/", viewRate);
+
+// admin.post("/contribute/", Contribute);
+
+// admin.get("/contribute/", getContribute);
+
+
+// admin.post("/donate/", donate);
+
+// admin.get("/donate/", getdonate);
+
+// admin.post("/watsapp/", watsapp);
+
+
+
+export default admin;
