@@ -252,7 +252,7 @@ thread }= req.body
 
       
 
-    res.status(201).json({ message: "Sucessfully fectched number of comments ", count: Object.keys(all).length });
+    res.status(201).json({ message: "Sucessfully fectched number of comments ",thread: thread, count: Object.keys(all).length });
   
      
   } catch (err) {
@@ -273,7 +273,7 @@ thread }= req.body
 
       
 
-    res.status(201).json({ message: "Sucessfully fectched number of rate ", count: Object.keys(all).length });
+    res.status(201).json({ message: "Sucessfully fectched number of rate ", thread: thread, count: Object.keys(all).length });
   
      
   } catch (err) {

@@ -254,6 +254,7 @@ export const resetPassword = asyncWrapper(async (req, res) => {
 
 export const update = asyncWrapper(async (req, res) => {
   const {
+    id,
     name,
     userName,
     state,
@@ -263,7 +264,7 @@ export const update = asyncWrapper(async (req, res) => {
     age,
   } = req.body;
   try {
-    const user = await Usermod.findOne({ _id: req.body.id });
+    const user = await Usermod.findOne({ _id: id });
 
     if (!user) return res.status(404).json({ message: "user does not exist" });
 
