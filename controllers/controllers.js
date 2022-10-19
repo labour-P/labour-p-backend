@@ -83,7 +83,7 @@ export const donate = asyncWrapper(async (req, res) => {
       //integration
   const response = await got.post("https://api.flutterwave.com/v3/payments", {
       headers: {
-          Authorization: `Bearer FLWSECK_TEST-8060b971652556328570db6c18a1edab-X`
+          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`
       },
       json: {
           tx_ref: tx_ref,
