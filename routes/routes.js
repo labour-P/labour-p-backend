@@ -1,5 +1,5 @@
 import express from "express";
-import {createPosts,viewPosts,createComments, viewComments, createRate, viewRate,  noRate,noComments  } from "../controllers/posts.js";
+import {createPosts,viewPosts,createComments, viewComments, createRate, viewRate, Count, noRate,noComments  } from "../controllers/posts.js";
 import {Contribute,getContribute,getdonate, donate } from "../controllers/controllers.js";
 import {watsapp } from "../controllers/watsapp.js";
 
@@ -14,6 +14,7 @@ route.post("/comments/", createComments);
 route.post("/norate/",noRate );
 
 route.post("/nocomments/", noComments );
+route.post("/count/", Count );
 
 route.post("/viewcomments/", viewComments);
 route.post("/rate/", createRate);

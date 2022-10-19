@@ -239,8 +239,32 @@ videourl
   }
 });
 
-  
+
  
+
+export const Count  = asyncWrapper(async (req, res) => {
+  const {
+  
+thread }= req.body
+  try {
+      
+      const all= await Comments.find({thread: thread});
+      // const updated = await Postsmo.findOneAndUpdate({ thread: thread, comment: Object.keys(all).length});
+
+      const all2= await Rate.find({thread: thread});
+
+
+    res.status(201).json({ message: "Sucessfully fectched  ",thread: thread, countComment: Object.keys(all).length , countRate: Object.keys(all2).length });
+  
+     
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: err.message });
+  }
+});
+
+
 export const noComments = asyncWrapper(async (req, res) => {
   const {
   
