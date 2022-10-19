@@ -5,6 +5,8 @@ const adminPostSchema = mongoose.Schema({
   username: { type: String, required: true},
   name: { type: String, required: true},
   profileUrl: {},
+  cartegory: {}, 
+  heading: {},
   thread: {},
   role: { type: String,
     enum: [ "0", "1"],
