@@ -37,7 +37,7 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
   } catch (err) {
     res
       .status(500)
-      .json({ message: "Something went wrong", error: err.message });
+      .json({ message: "Something went wrong", error: err });
   }
 });
 

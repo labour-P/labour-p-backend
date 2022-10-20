@@ -306,6 +306,24 @@ export const update = asyncWrapper(async (req, res) => {
 
 
 
+export const fileupp = asyncWrapper(async (req, res) => {
+const{
+  file
+}=req.file  
+  try {
+    uploader.single(file);
+    const upload = await cloudinary.v2.uploader.upload(req.file.path);
+      return res.json({
+        success: true,
+        file: upload.secure_url,});
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: err });
+  }
+});
+
+
 export const updateProfile = asyncWrapper(uploader.single("file"), async (req, res) => {
 
   
@@ -332,5 +350,4 @@ export const updateProfile = asyncWrapper(uploader.single("file"), async (req, r
       .json({ message: "Something went wrong", error: err });
   }
 });
-
    

@@ -1,7 +1,17 @@
 import express from "express";
+import multer from "multer";
+import cloudinary from "cloudinary";
 import dotenv from "dotenv";
 import cors from "cors";
 import errorHandler from "./middlewares/error-handler.js";
+
+import cloudinaryconfig from "./middlewares/cloudinary.js";
+import uploader from "./middlewares/multer.js";
+
+import formidable from 'formidable';
+const upload = multer({ dest: 'uploads/',storage: multer.diskStorage({}),
+limits: { fileSize: 500000 } })
+
 
 //routes
 import routes from "./routes/routes.js";
@@ -14,10 +24,18 @@ import connect_db from "./db/db.js";
 const app = express();
 dotenv.config();
 
+cloudinary.config({ 
+  cloud_name: 'dbexrzrgs', 
+  api_key: '724351726478768', 
+  api_secret: 'LCoKD-mQSoeuPC9uwXO27c7PAW8' 
+  
+});
 //middlewares
 app.use(express.json());
 app.use(cors({ origin: "*" }));
-app.use(express.urlencoded({ extended: true }));
+//for parsing multipart/form-data
+app.use(express.static('public'));
+
 
 //routes
 
@@ -29,10 +47,23 @@ app.use("/api/routes", routes);
 app.use("/api/admin", admin);
 
 
+
+
 app.get("/", function(req, res){
  res.send("welcome to Labour-P API, The  server is up and running");
  });
+ 
 
+
+ app.post('/upload', upload.single('file'), function (req, res, next) {
+  // req.file is the `avatar` file
+ //return res.send(req.file.path)
+  const upload = cloudinary.v2.uploader.upload(req.file.path);
+   return res.json({
+     success: true, file: upload.secure_url
+   });
+  // req.body will hold the text fields, if there were any
+});
 
 
 

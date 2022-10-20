@@ -10,8 +10,10 @@ import {
   verifyAccount,
   verifyUsername,
   updateProfile,
+  fileupp
 } from "../controllers/auth.js";
 
+import { fileuploader } from "../controllers/posts.js";
 
 const router = express.Router();
 
@@ -28,6 +30,7 @@ router.post("/forgotpassword", forgetPassword);
 router.post("/resetpassword", resetPassword);
 router.post("/updateprofile", updateProfile);
 router.post("/update", update);
+router.post("/uploadfile", fileuploader);
 
 
 

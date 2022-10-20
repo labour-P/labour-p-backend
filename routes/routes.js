@@ -3,6 +3,11 @@ import {createPosts,viewPosts,createComments, viewComments, createRate, viewRate
 import {Contribute,getContribute,getdonate, donate, paymentcallback } from "../controllers/controllers.js";
 import {watsapp } from "../controllers/watsapp.js";
 
+import uploader from "../middlewares/multer.js";
+
+
+import cloudinary from "../middlewares/cloudinary.js";
+
 const route = express.Router();
 
 
@@ -35,6 +40,18 @@ route.get("/payment-callback/", paymentcallback);
 
 route.post("/watsapp/", watsapp);
 
+
+
+
+
+
+route.post("/upload", uploader.single("file"), async (req, res) => {
+  const upload = await cloudinary.v2.uploader.upload(req.file.path);
+  return res.json({
+    success: true,
+    file: upload.secure_url,
+  });
+});
 
 
 export default route;
