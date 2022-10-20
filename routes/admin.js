@@ -1,13 +1,11 @@
 import express from "express";
-import {createPosts,viewPosts,createComments, viewComments, createRate, viewRate  } from "../controllers/admin.js";
-import {Contribute,getContribute,getdonate, donate } from "../controllers/controllers.js";
-import {watsapp } from "../controllers/watsapp.js";
+import {createPosts,viewPosts } from "../controllers/admin.js";
 
 const admin = express.Router();
 
 
 admin.post("/posts/", createPosts);
-admin.get("/posts/", viewPosts);
+admin.get("/viewposts/", viewPosts);
 
 
 
