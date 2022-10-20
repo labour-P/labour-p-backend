@@ -267,9 +267,9 @@ export const update = asyncWrapper(async (req, res) => {
     age,
   } = req.body;
   try {
-    const user = await Usermod.findOne({ _id: id });
+    const user = await Usermod.find({_id: id});
 
-    if (!user) return res.status(404).json({ message: "user does not exist" });
+    if (!user) {return res.status(404).json({ message: "user does not exist" });}
 
     Usermod.name= name;
     Usermod.userName= userName;
@@ -294,60 +294,4 @@ export const update = asyncWrapper(async (req, res) => {
 
 
 
-// app.post("/upload", uploader.single("file"), async (req, res) => {
-//   const upload = await cloudinary.v2.uploader.upload(req.file.path);
-//   return res.json({
-//     success: true,
-//     file: upload.secure_url,
-//   });
-// });
 
-
-
-
-
-export const fileupp = asyncWrapper(async (req, res) => {
-const{
-  file
-}=req.file  
-  try {
-    uploader.single(file);
-    const upload = await cloudinary.v2.uploader.upload(req.file.path);
-      return res.json({
-        success: true,
-        file: upload.secure_url,});
-  } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Something went wrong", error: err });
-  }
-});
-
-
-export const updateProfile = asyncWrapper(uploader.single("file"), async (req, res) => {
-
-  
-  try {
-   
-    const upload = await cloudinary.v2.uploader.upload(req.file.path);
-
-    const user = await Usermod.findOne({ _id: req.body.id });
-
-    if (!user) return res.status(404).json({ message: "user does not exist" });
-
-    Usermod.profileUrl = upload.secure_url;
-    Usermod.save();
-    return res
-    .status(200)
-    .json({
-      success: true,
-      file: upload.secure_url,
-      message: "profile picture uploaded successfully"
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Something went wrong", error: err });
-  }
-});
-   
