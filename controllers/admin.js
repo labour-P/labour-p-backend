@@ -46,7 +46,7 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
  export const viewPosts = asyncWrapper(async (req, res) => {
  
     try {
-      if(!cartegory.req.body){
+      // if(cartegory.req.body== null){
         adminPosts.find((err, stats)=>{
 
           if(err){
@@ -60,16 +60,17 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
          return res.json(stats);
       });
           
-      }
-        adminPosts.find({ cartegory: cartegory.req.body }, function (err, response) {
-          if(!response){
-            return res
-            .status(400)
-            .json({ message: "no Posts found", error: err.message });
-          }
-          return res.json(response);
+      // }else{
+      //   adminPosts.find({ cartegory: cartegory.req.body }, function (err, response) {
+      //     if(!response){
+      //       return res
+      //       .status(400)
+      //       .json({ message: "no Posts found", error: err.message });
+      //     }
+      //     return res.json(response);
   
-        });
+      //   });
+      // }
     } catch (err) {
       res
         .status(500)
