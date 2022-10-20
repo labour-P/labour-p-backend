@@ -44,11 +44,24 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
 
  //get all posts
  export const viewPosts = asyncWrapper(async (req, res) => {
-  const{cartegory
-  }=req.body;
+ 
     try {
-      
-        adminPosts.find({ cartegory: cartegory }, function (err, response) {
+      if(!cartegory.req.body){
+        adminPosts.find((err, stats)=>{
+
+          if(err){
+              return res.send(err);
+          }
+          if(!stats){
+            return res
+            .status(400)
+            .json({ message: "no Posts found", error: err.message });
+          }
+         return res.json(stats);
+      });
+          
+      }
+        adminPosts.find({ cartegory: cartegory.req.body }, function (err, response) {
           if(!response){
             return res
             .status(400)
