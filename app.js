@@ -24,7 +24,7 @@ import connect_db from "./db/db.js";
 const app = express();
 dotenv.config();
 
-cloudinary.config({ 
+cloudinary.v2.config({ 
   cloud_name: 'dbexrzrgs', 
   api_key: '724351726478768', 
   api_secret: 'LCoKD-mQSoeuPC9uwXO27c7PAW8' 
@@ -58,12 +58,14 @@ app.get("/", function(req, res){
  app.post('/upload', upload.single('file'), function (req, res, next) {
   // req.file is the `avatar` file
  //return res.send(req.file.path)
-  const upload = cloudinary.v2.uploader.upload(req.file.path);
+  const uploadres = cloudinary.uploader.upload(req.file.path, {upload_preset: "dev_setups"});
    return res.json({
-     success: true, file: upload.secure_url
+    success: true, url: uploadres
+
    });
   // req.body will hold the text fields, if there were any
 });
+
 
 
 
