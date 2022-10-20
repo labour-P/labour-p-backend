@@ -105,9 +105,9 @@ export const donate = asyncWrapper(async (req, res) => {
 
     console.log(err.code);
   console.log(err.response.body);
-    res
+   return res
       .status(500)
-      .json({ message: "Something went wrong", error: err.message });
+      .json({ message: "Something went wrong", error: err.response.body });
   }
 });
 
