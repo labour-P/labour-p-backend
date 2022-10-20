@@ -55,12 +55,13 @@ app.get("/", function(req, res){
  
 
 
- app.post('/upload', upload.single('file'), function (req, res, next) {
+ app.post('/upload', upload.single('file'), async (req, res, next) =>{
   // req.file is the `avatar` file
  //return res.send(req.file.path)
-  const uploadres = cloudinary.uploader.upload(req.file.path, {upload_preset: "dev_setups"});
+  const uploadres = await cloudinary.uploader.upload(req.file.path, {upload_preset: "dev_setup"});
+  console.log(uploadres);
    return res.json({
-    success: true, url: uploadres
+    success: true, url: uploadres.secure_url
 
    });
   // req.body will hold the text fields, if there were any
