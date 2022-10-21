@@ -10,7 +10,7 @@ import uploader from "./middlewares/multer.js";
 
 import formidable from 'formidable';
 const upload = multer({ dest: 'uploads/',storage: multer.diskStorage({}),
-limits: { fileSize: 900000 } })
+limits: { fileSize: 52428800 } })
 
 
 
@@ -22,6 +22,7 @@ import admin from "./routes/admin.js";
 
 import bodyparser from "body-parser";
 import connect_db from "./db/db.js";
+import { rmSync } from "fs";
 const app = express();
 dotenv.config();
 
@@ -39,9 +40,9 @@ app.use(express.static('public'));
 
 
 //routes
-
-app.use(bodyparser.urlencoded({ extended: true }));
-app.use(bodyparser.json()); 
+//app.use(limit(100000000));
+app.use(bodyparser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyparser.json({limit: '50mb'})); 
 
 app.use("/api/auth", auth);
 app.use("/api/routes", routes);
@@ -55,11 +56,13 @@ app.get("/", function(req, res){
  });
  
  //upload.single('file')
+ 
+ //upload.array('file',9)
 
  
- app.post('/upload', upload.array('userPhoto',9), async (req, res, next) =>{
+ app.post('/upload', upload.single('file'), async (req, res, next) =>{
   // req.file is the `avatar` file
- //return res.send(req.file.path)
+ //return res.send(req)
   const uploadres = await cloudinary.uploader.upload(req.file.path, {upload_preset: "dev_setup"});
   console.log(uploadres);
    return res.json({
