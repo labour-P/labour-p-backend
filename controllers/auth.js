@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Usermod from "../models/user.js";
 import Token from "../models/Token.js";
-import  {sms} from "../middlewares/sms.js";
+import  {sms} from "../middlewares/tarmi.js";
 import uploader from "../middlewares/multer.js";
 
 

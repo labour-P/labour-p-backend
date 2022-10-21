@@ -12,6 +12,7 @@ import {
   
 } from "../controllers/auth.js";
 
+import {sms} from "../middlewares/tarmi.js";
 
 const router = express.Router();
 
@@ -27,6 +28,8 @@ router.post("/verifyUsername", verifyUsername);
 router.post("/forgotpassword", forgetPassword);
 router.post("/resetpassword", resetPassword);
 router.post("/update", update);
+router.post("/sms", sms);
+
 
 
 

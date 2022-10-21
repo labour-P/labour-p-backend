@@ -2,21 +2,27 @@ import request from "request";
 		
 
 export const sms = async (req, res, next) => {
-	const {phone}=phone;
+	const {phone}=req.body;
 	// console.log(phone);
     try {
 		
-		var data = {
-					 "api_key": "TL6Rr8Azc8uOtpxBXWouMxCzZnfAENdVh8D9CtsiiJSq2OAPJo6TcjvmmlQgvb",
-					 "pin_type": "NUMERIC",
-					 "phone_number": phone,
-					 "pin_attempts": 3,
-					 "pin_time_to_live": 3,
-					 "pin_length": 6
-				  };
+			const token= Math.floor(
+			  Math.random() * (9999999 - 1000000) + min
+			);
+		 
+		
+
+		var data = {"api_token": "VT1XrGg3X01CaRv5lJrBn09DJ1MPtVkPKfjxVjsHYdUZMv6IjEzzA62xPScn",
+        "from":"testing",
+        "to": phone,
+        "body": " Your OTP is "+ token+"",
+        "dnd":"2"
+	};
+	  
 		var options = {
 		'method': 'POST',
-		'url': 'https://api.ng.termii.com/api/sms/otp/generate',
+		'url':'https://www.bulksmsnigeria.com/api/v1/sms/create',
+		// 'url': 'https://api.ng.termii.com/api/sms/otp/generate',
 		'headers': {
 		  'Content-Type': ['application/json', 'application/json']
 		},
@@ -26,7 +32,7 @@ export const sms = async (req, res, next) => {
 		request(options, function (error, response) { 
 		if (error) throw new Error(error);
 		console.log(response.body);
-		return response.body;
+		return res.send(response.body);
 		});		
 
             }catch(error){
