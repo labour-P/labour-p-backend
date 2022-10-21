@@ -10,7 +10,8 @@ import uploader from "./middlewares/multer.js";
 
 import formidable from 'formidable';
 const upload = multer({ dest: 'uploads/',storage: multer.diskStorage({}),
-limits: { fileSize: 90000000 } })
+limits: { fileSize: 900000 } })
+
 
 
 //routes
@@ -53,9 +54,10 @@ app.get("/", function(req, res){
  res.send("welcome to Labour-P API, The  server is up and running");
  });
  
+ //upload.single('file')
 
-
- app.post('/upload', upload.single('file'), async (req, res, next) =>{
+ 
+ app.post('/upload', upload.array('userPhoto',9), async (req, res, next) =>{
   // req.file is the `avatar` file
  //return res.send(req.file.path)
   const uploadres = await cloudinary.uploader.upload(req.file.path, {upload_preset: "dev_setup"});

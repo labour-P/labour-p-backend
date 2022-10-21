@@ -182,9 +182,7 @@ export const createPosts = asyncWrapper(async (req, res) => {
     try {
         const addPosts= new Postsmo(req.body);
         addPosts.save();
-      res.status(201).json({ message: "Sucessfully added your post" });
-    
-       
+      res.status(201).json({ data: addPosts, message: "Sucessfully added your post" });      
     } catch (err) {
       res
         .status(500)
