@@ -269,26 +269,21 @@ export const update = asyncWrapper(async (req, res) => {
     id,
     name,
     userName,
-    state,
-    lga,
-    ward,
-    pollingUnit,
-    age,
+    profileUrl,
+    
   } = req.body;
   try {
     
     const user = await Usermod.findOne({id});
 
     if (!user) {return res.status(404).json({ message: "user does not exist" });}
+    
 
-    Usermod.name= name;
-    Usermod.userName= userName;
-    Usermod.state= state;
-    Usermod.lga=  lga;
-    Usermod.ward= ward;
-    Usermod.pollingUnit= pollingUnit;
-    Usermod.age=  age;
-    Usermod.save();
+     user.name=name;
+    user.userName= userName;
+    user.profileUrl =profileUrl;
+   
+    await user.save();
     return res.status(200).json({ message: "profile update successfully" });
   } catch (err) {
     res
