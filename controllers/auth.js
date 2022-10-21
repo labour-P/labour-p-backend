@@ -59,14 +59,11 @@ export const verifyAccount = asyncWrapper(async (req, res) => {
       if (emailexist || phoneexist ){
         res.status(400).json({ message: "User already exists" });
       }else{
-        const text= "your otp is:";
-        const token= "123567";
+        
         const phonenum= phone;
-const message={
-token,phonenum,text
-};
+
 console.log(phonenum);
-        sms({message});
+        sms({phonenum});
         res
         .status(200)
         .json({ message: "email and phone number available", token: token });

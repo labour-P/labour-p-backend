@@ -2,18 +2,14 @@ import request from "request";
 		
 
 export const sms = async (req, res, next) => {
-	const {phone}=req.body;
-	// console.log(phone);
+	const {phone}=req;
+	console.log(phone);
     try {
 		
-			const token= Math.floor(
-			  Math.random() * (9999999 - 1000000) + min
-			);
+		const token = Math.floor( Math.random() * (9999999 - 1000000) + 1000000);
 		 
-		
-
 		var data = {"api_token": "VT1XrGg3X01CaRv5lJrBn09DJ1MPtVkPKfjxVjsHYdUZMv6IjEzzA62xPScn",
-        "from":"testing",
+        "from":"LabourP",
         "to": phone,
         "body": " Your OTP is "+ token+"",
         "dnd":"2"
