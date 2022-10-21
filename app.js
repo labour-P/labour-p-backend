@@ -10,7 +10,7 @@ import uploader from "./middlewares/multer.js";
 
 import formidable from 'formidable';
 const upload = multer({ dest: 'uploads/',storage: multer.diskStorage({}),
-limits: { fileSize: 900000 } })
+limits: { fileSize: 90000000 } })
 
 
 //routes

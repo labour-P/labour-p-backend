@@ -104,15 +104,20 @@ export const verifyUsername = asyncWrapper(async (req, res) => {
 export const signup = asyncWrapper(async (req, res) => {
   const {
     name,
-    password,
-    userName,
     phone,
     email,
+    userName,
+    profileUrl,
+    role,
+    password,
+    address,
+    city,
     state,
     lga,
-  ward,
-  pollingUnit,
-  age,
+    ward,
+    pollingUnit,
+    age,
+   
   } = req.body;
   try {
     const oldUser = await Usermod.findOne({ email });
@@ -132,16 +137,20 @@ export const signup = asyncWrapper(async (req, res) => {
 
     const result = await Usermod.create({
       name,
-      password: hashedPassword,
-      userName,
-      phone,
-      email,
-      state,
-      lga,
+    phone,
+    email,
+    userName,
+    profileUrl,
+    role,
+    password: hashedPassword,
+    address,
+    city,
+    state,
+    lga,
     ward,
     pollingUnit,
-    age
-    
+    age,
+   
     });
 
     // const token = jwt.sign({ email: result.email, id: result._id }, secret, {
@@ -267,7 +276,8 @@ export const update = asyncWrapper(async (req, res) => {
     age,
   } = req.body;
   try {
-    const user = await Usermod.find({_id: id});
+    
+    const user = await Usermod.findOne({id});
 
     if (!user) {return res.status(404).json({ message: "user does not exist" });}
 
