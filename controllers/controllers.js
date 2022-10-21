@@ -75,9 +75,8 @@ export const donate = asyncWrapper(async (req, res) => {
     email,
     phone,
     name,
-    redirect_url
-
-  }=req.body;
+    redirect_url}=req.body;
+    
   try {
     
       //integration
@@ -101,6 +100,7 @@ export const donate = asyncWrapper(async (req, res) => {
           }
       }
   }).json();
+  return res.send(response);
 } catch (err) {
 
     console.log(err.code);
