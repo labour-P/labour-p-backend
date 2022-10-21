@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 import Usermod from "../models/user.js";
 import Token from "../models/Token.js";
 import  {sms} from "../middlewares/tarmi.js";
+import request from "request";
+
 import uploader from "../middlewares/multer.js";
 
 
@@ -61,9 +63,35 @@ export const verifyAccount = asyncWrapper(async (req, res) => {
       }else{
         
         const phonenum= phone;
+        const token =  Math.floor( Math.random() * (9999999 - 1000000) + 1000000);
 
 console.log(phonenum);
-        sms({phonenum});
+const cred={phone,token};
+
+	 
+var data = {"api_token": "VT1XrGg3X01CaRv5lJrBn09DJ1MPtVkPKfjxVjsHYdUZMv6IjEzzA62xPScn",
+"from":"LabourP",
+"to": phone,
+"body": " Your OTP is"+token+"",
+"dnd":"2"
+};
+
+var options = {
+'method': 'POST',
+'url':'https://www.bulksmsnigeria.com/api/v1/sms/create',
+// 'url': 'https://api.ng.termii.com/api/sms/otp/generate',
+'headers': {
+'Content-Type': ['application/json', 'application/json']
+},
+body: JSON.stringify(data)
+
+};
+request(options, function (error, response) { 
+if (error) throw new Error(error);
+console.log(response.body);
+});	
+
+       
         res
         .status(200)
         .json({ message: "email and phone number available", token: token });

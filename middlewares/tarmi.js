@@ -3,15 +3,18 @@ import request from "request";
 
 export const sms = async (req, res, next) => {
 	const {phone}=req;
-	console.log(phone);
+	// const{phone,
+	// token}= cred;
+
+	// console.log(cred);
+
     try {
 		
-		const token = Math.floor( Math.random() * (9999999 - 1000000) + 1000000);
 		 
 		var data = {"api_token": "VT1XrGg3X01CaRv5lJrBn09DJ1MPtVkPKfjxVjsHYdUZMv6IjEzzA62xPScn",
         "from":"LabourP",
         "to": phone,
-        "body": " Your OTP is "+ token+"",
+        "body": " Your OTP is 1234567",
         "dnd":"2"
 	};
 	  
