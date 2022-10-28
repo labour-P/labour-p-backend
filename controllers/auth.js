@@ -21,7 +21,7 @@ export const signin = asyncWrapper(async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const oldUser = await Usermod.findOne({ email });
+    const oldUser = await Usermod.find({ email: email });
 
     if (!oldUser)
       return res.status(404).json({ message: "User doesn't exist" });
@@ -56,8 +56,8 @@ export const verifyAccount = asyncWrapper(async (req, res) => {
         console.log(phone);
         console.log(email);
         
-      const emailexist = await Usermod.findOne({ email });
-      const phoneexist = await Usermod.findOne({ phone });
+      const emailexist = await Usermod.find({ email: email });
+      const phoneexist = await Usermod.find({ phone: phone });
       if (emailexist || phoneexist ){
         res.status(400).json({ message: "User already exists" });
       }else{
@@ -110,7 +110,7 @@ console.log(response.body);
 export const verifyUsername = asyncWrapper(async (req, res) => {
   const {username} = req.body;
     try {
-      const usernameexist = await Usermod.findOne({ username });
+      const usernameexist = await Usermod.find({ username: username });
       
       if (usernameexist ){
         return res.status(400).json({ message: "User already exists" });
@@ -145,9 +145,9 @@ export const signup = asyncWrapper(async (req, res) => {
    
   } = req.body;
   try {
-    const oldUser = await Usermod.findOne({ email });
-    const oldUserphone = await Usermod.findOne({ phone });
-    const oldUsername = await Usermod.findOne({ userName });
+    const oldUser = await Usermod.find({email: email });
+    const oldUserphone = await Usermod.find({phone: phone });
+    const oldUsername = await Usermod.find({ username: userName });
 
     if (oldUsername)
     return res.status(400).json({ message: "User already exists" });
@@ -204,7 +204,7 @@ return result;
 export const forgetPassword = asyncWrapper(async (req, res) => {
   try {
 
-    const user = await Usermod.findOne({ phone: req.body.phone });
+    const user = await Usermod.find({ phone: req.body.phone });
 
     if (!user) {
       return res.status(400).json({
@@ -225,7 +225,7 @@ console.log(phonenum);
     });
   }
 
-    // let token = await Token.findOne({ userId: Usermod._Id });
+    // let token = await Token.find({ userId: Usermod._Id });
 
     // if (!token) {
     //   token = await new Token({
@@ -248,7 +248,7 @@ console.log(phonenum);
 // reset password
 export const checkResetLink = asyncWrapper(async (req, res) => {
   try {
-    let token = await Token.findOne({ resetPasswordToken: req.params.token });
+    let token = await Token.find({ resetPasswordToken: req.params.token });
 
     if (!token) {
       return res.status(400).json({
@@ -268,7 +268,7 @@ export const resetPassword = asyncWrapper(async (req, res) => {
   {phone,
   password}=req.body;
   try {
-    const user = await Usermod.findOne({ phone: phone });
+    const user = await Usermod.find({ phone: phone });
 
     if (!user) {
       return res
@@ -299,7 +299,7 @@ export const update = asyncWrapper(async (req, res) => {
   } = req.body;
   try {
     
-    const user = await Usermod.findOne({id});
+    const user = await Usermod.find({_id: id});
 
     if (!user) {return res.status(404).json({ message: "user does not exist" });}
     
