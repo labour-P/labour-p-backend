@@ -21,7 +21,7 @@ export const signin = asyncWrapper(async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const oldUser = await Usermod.findOne({ email:email });
+    const oldUser = await Usermod.find({ email:email });
 
     if (!oldUser)
       return res.status(404).json({ message: "User doesn't exist" });
