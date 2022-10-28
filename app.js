@@ -52,7 +52,7 @@ app.use("/api/admin", admin);
 
 
 app.get("/", function(req, res){
- res.send("welcome to Labour-P API, The  server is up and running");
+ res.send("hello and welcome to Labour-P API, The  server is up and running");
  });
  
  //upload.single('file')
