@@ -10,7 +10,7 @@ import uploader from "./middlewares/multer.js";
 
 import formidable from 'formidable';
 const upload = multer({ dest: 'uploads/',storage: multer.diskStorage({}),
-limits: { fileSize: 50*1000*1000} })
+limits: { fileSize: 50000000} })
 
 
 
@@ -64,7 +64,7 @@ app.get("/", function(req, res){
 
   try{
   // req.file is the `avatar` file
- return res.send(req);
+//  return res.send(req);
   const uploadres = await cloudinary.uploader.upload(req.file.path, {upload_preset: "dev_setup"});
   console.log(uploadres);
    return res.json({
