@@ -1,6 +1,6 @@
 import express from "express";
 import {createPosts,viewPosts,createComments, viewComments, createRate, viewRate, Count, noRate,noComments  } from "../controllers/posts.js";
-import {Contribute,getContribute,getdonate, donate, paymentcallback } from "../controllers/controllers.js";
+import {Contribute,getContribute,getdonate, donate, paymentcallback, paystackcallback } from "../controllers/controllers.js";
 import {watsapp } from "../controllers/watsapp.js";
 
 import uploader from "../middlewares/multer.js";
@@ -35,6 +35,9 @@ route.post("/donate/", donate);
 route.get("/donate/", getdonate);
 
 route.get("/payment-callback/", paymentcallback);
+
+route.get("/paystack-callback/", paystackcallback);
+
 
 
 

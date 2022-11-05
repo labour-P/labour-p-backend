@@ -45,21 +45,18 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
 
  //get all posts
  export const viewPosts = asyncWrapper(async (req, res) => {
+  const {page}= req.body;
     try {
-       const model= Postsmo.find((err, stats)=>{
-            if(err){
-                return res.send(err);
-            }
-            // stats.forEach(element => {
-            //   console.log(element);
-            // //   const noComment= await Comments.find({thread: thread});
-            // // const noRate= await Rate.find({thread: thread});
-            // });
-            // const obj =Object.values(stats.thread);
+      const Limit = 5;
+      const Index= (Number(page)-1)*Limit;
 
-            // console.log(obj);
+      // const total= await Postsmo.countDocuments({});
+       const model= await Postsmo.find().sort({_id:-1}).limit(Limit).skip(Index);
 
-           return res.json(stats);
+        res.json({
+          data: model,
+          currentpage: Number(page),
+          // numberOfPages: Math.cell(total/Limit),
         });
         
     } catch (err) {

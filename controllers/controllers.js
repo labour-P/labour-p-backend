@@ -75,8 +75,57 @@ export const donate = asyncWrapper(async (req, res) => {
     email,
     phone,
     name,
-    redirect_url}=req.body;
-    
+    redirect_url,
+  platform}=req.body;
+
+switch (platform) {
+case paystack:
+  
+  try{
+    const https = require('https')
+  
+  const params = JSON.stringify({
+    "email": email,
+    "amount": amount,
+    "reference": tx_ref
+  })
+  
+  const options = {
+    hostname: 'api.paystack.co',
+    port: 443,
+    path: '/transaction/initialize',
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer SECRET_KEY',
+      'Content-Type': 'application/json'
+    }
+  }
+  
+  const req = https.request(options, res => {
+    let data = ''
+  
+    res.on('data', (chunk) => {
+      data += chunk
+    });
+  
+    res.on('end', () => {
+      console.log(JSON.parse(data))
+    })
+  }).on('error', error => {
+    console.error(error)
+  })
+  
+  req.write(params)
+  req.end()
+  }catch(err){
+    res
+    .status(500)
+    .json({ message: "Something went wrong", error: err.message });
+  
+  }
+break;
+case flutterwave:
+  default:
   try {
     
       //integration
@@ -101,14 +150,17 @@ export const donate = asyncWrapper(async (req, res) => {
       }
   }).json();
   return res.send(response);
-} catch (err) {
+ } catch (err) {
 
     console.log(err.code);
   console.log(err.response.body);
    return res
       .status(500)
       .json({ message: "Something went wrong", error: err.response.body });
+
   }
+break;
+}
 });
 
 
@@ -145,4 +197,62 @@ export const paymentcallback = asyncWrapper(async (req, res) => {
     .status(500)
     .json({ message: "Something went wrong", error: err.message });
 }
+
+});
+
+  
+export const paystackcallback = asyncWrapper(async (req, res) => {
+  try {
+
+    const https = require('https')
+
+const options = {
+  hostname: 'api.paystack.co',
+  port: 443,
+  path: '/transaction/verify/:reference',
+  method: 'GET',
+  headers: {
+    Authorization: 'Bearer SECRET_KEY'
+  }
+}
+
+https.request(options, res => {
+  let data = ''
+
+  res.on('data', (chunk) => {
+    data += chunk
+  });
+
+  res.on('end', () => {
+    console.log(JSON.parse(data))
+  })
+}).on('error', error => {
+  console.error(error)
+})
+  if (data.status === 'success') {
+     
+          // Success! Confirm the customer's payment
+          const adddonation= new donation(req.body);
+          adddonation.save();
+          res
+          .status(200)
+          .json({ message: "donation recieved" });
+      
+      } else {
+          // Inform the customer their payment was unsuccessful
+          res
+          .status(400)
+          .json({ message: "payment not succesful", error: err.message });
+      
+      }
+  }
+
+
+  
+ catch (err) {
+  res
+    .status(500)
+    .json({ message: "Something went wrong", error: err.message });
+}
+
 });
