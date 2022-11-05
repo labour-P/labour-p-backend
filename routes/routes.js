@@ -12,8 +12,8 @@ const route = express.Router();
 
 
 route.post("/posts/", createPosts);
-route.get("/posts/", viewPosts);
-route.get("/findposts/", findPosts);
+route.post("/posts/", viewPosts);
+route.post("/findposts/", findPosts);
 
 
 route.post("/comments/", createComments);
