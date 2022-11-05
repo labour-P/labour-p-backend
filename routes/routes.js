@@ -12,7 +12,7 @@ const route = express.Router();
 
 
 route.post("/posts/", createPosts);
-route.post("/posts/", viewPosts);
+route.post("/viewposts/", viewPosts);
 route.post("/findposts/", findPosts);
 
 
