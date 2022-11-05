@@ -86,7 +86,25 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
       }
     });
     
-  
+    export const findUserPosts = asyncWrapper(async (req, res) => {
+      const {userid}= req.body;
+        try {
+         
+          // const total= await Postsmo.countDocuments({});
+           const model= await Postsmo.find({_id:id});
+    
+            res.json({
+              data: model,
+             
+              // numberOfPages: Math.cell(total/Limit),
+            });
+            
+        } catch (err) {
+          res
+            .status(500)
+            .json({ message: "Something went wrong", error: err.message });
+        }
+      });
 
 
  //get all comments

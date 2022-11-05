@@ -1,5 +1,5 @@
 import express from "express";
-import {createPosts,viewPosts,createComments, viewComments, createRate, viewRate, Count, noRate,noComments, findPosts } from "../controllers/posts.js";
+import {createPosts,viewPosts,createComments, viewComments, createRate, viewRate, Count, noRate,noComments, findPosts, findUserPosts } from "../controllers/posts.js";
 import {Contribute,getContribute,getdonate, donate, paymentcallback, paystackcallback } from "../controllers/controllers.js";
 import {watsapp } from "../controllers/watsapp.js";
 
@@ -14,6 +14,8 @@ const route = express.Router();
 route.post("/posts/", createPosts);
 route.post("/viewposts/", viewPosts);
 route.post("/findposts/", findPosts);
+route.post("/finduserposts/", findUserPosts);
+
 
 
 route.post("/comments/", createComments);
