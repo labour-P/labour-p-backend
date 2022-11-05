@@ -91,7 +91,7 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
         try {
          
           // const total= await Postsmo.countDocuments({});
-           const model= await Postsmo.find({userd:userid});
+           const model= await Postsmo.find({userid:userid});
     
             res.json({
               data: model,
