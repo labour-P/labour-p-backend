@@ -47,7 +47,7 @@ export const fileuploader = asyncWrapper(uploader.single("file"), async (req, re
  export const viewPosts = asyncWrapper(async (req, res) => {
   const {page}= req.body;
     try {
-      const Limit = 5;
+      const Limit = 15;
       const Index= (Number(page)-1)*Limit;
 
       // const total= await Postsmo.countDocuments({});
