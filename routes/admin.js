@@ -1,5 +1,5 @@
 import express from "express";
-import {createPosts,viewPosts } from "../controllers/admin.js";
+import {createPosts,viewPosts, stats, viewreport, report, deletekey } from "../controllers/admin.js";
 
 const admin = express.Router();
 
@@ -7,8 +7,13 @@ const admin = express.Router();
 admin.post("/posts/", createPosts);
 admin.get("/viewposts/", viewPosts);
 
+admin.get("/stats/", stats);
 
+admin.get("/viewreport/", viewreport);
 
+admin.post("/report/", report);
+
+admin.post("/delete", deletekey);
 
 // admin.post("/comments/", createComments);
 
