@@ -101,20 +101,27 @@ export const report = asyncWrapper(async (req, res) => {
     eventtype
   }=req.body;
     try {
-      // const report= await Reports.find({ eventid: eventid}, (err, stats)=>{
-      //     if(report==null){
-      //       console.log(report);
-      // }}
-      // );
+      const reports= await Reports.findOne({ _id: eventid}, (err, stats)=>{
+          if(stats==null){
+            const gravity= 0;
+              const addReport= new Reports({eventid, eventtype, gravity});
+                    addReport.save();
+  //  res.status(201).json({ message: "Sucessfully Sumbitted your Report", data: addReport });
+          
+            console.log(stats);
+      }else{
+        console.log(stats);
+
+        const gravity= report.gravity + 1;
+const updated = Reports.findOneAndUpdate({ eventid: eventid, gravity: gravity});
+        // return res.json(stats);
+      }
+    });
 
       // if(report==[]){ console.log(report)
       //   return res.json(report);
       // }else{
-        const gravity= 0;
-              const addReport= new Reports({eventid, eventtype, gravity});
-                    addReport.save();
-   res.status(201).json({ message: "Sucessfully Sumbitted your Report", data: addReport });
-              
+            
       // }
 
       // const report= await Reports.find({ eventid: eventid}, (err, stats)=>{
