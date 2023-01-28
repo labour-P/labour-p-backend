@@ -72,7 +72,7 @@ const cred={phone,token};
 var data = {"api_token": "VT1XrGg3X01CaRv5lJrBn09DJ1MPtVkPKfjxVjsHYdUZMv6IjEzzA62xPScn",
 "from":"LabourP",
 "to": phone,
-"body": " Your OTP is"+token+"",
+"body": " Your One time password is "+token+"",
 "dnd":"6"
 };
 
