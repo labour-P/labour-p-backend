@@ -72,8 +72,8 @@ const cred={phone,token};
 var data = {"api_token": "VT1XrGg3X01CaRv5lJrBn09DJ1MPtVkPKfjxVjsHYdUZMv6IjEzzA62xPScn",
 "from":"LabourP",
 "to": phone,
-"body": " Your One time password is "+token+"",
-"dnd":"6"
+"body": " Your One time pass is "+token+"",
+"dnd":"2"
 };
 
 var options = {
@@ -208,17 +208,42 @@ export const forgetPassword = asyncWrapper(async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        message: `we couldnt find a user with this email -${req.body.phone}`,
+        message: `we couldnt find a user with this phone number -${req.body.phone}`,
       });
     }else{
-      const text= "your otp is:";
-      const token= "123567";
-      const phonenum=req.body.phone;
-const message={
-token,phonenum,text
-};
+      const phonenum= phone;
+      const token =  Math.floor( Math.random() * (9999999 - 1000000) + 1000000);
+
 console.log(phonenum);
-      sms({message});
+const cred={phone,token};
+
+ 
+var data = {"api_token": "VT1XrGg3X01CaRv5lJrBn09DJ1MPtVkPKfjxVjsHYdUZMv6IjEzzA62xPScn",
+"from":"LabourP",
+"to": phone,
+"body": " Your One time pass is "+token+"",
+"dnd":"2"
+};
+
+var options = {
+'method': 'POST',
+'url':'https://www.bulksmsnigeria.com/api/v1/sms/create',
+// 'url': 'https://api.ng.termii.com/api/sms/otp/generate',
+'headers': {
+'Content-Type': ['application/json', 'application/json']
+},
+body: JSON.stringify(data)
+
+};
+request(options, function (error, response) { 
+if (error) throw new Error(error);
+console.log(response.body);
+});	
+
+     
+     
+console.log(phonenum);
+      // sms({message});
       return res.status(200).json({
         message: 'token sent to this phone ',
         token:token
