@@ -211,11 +211,11 @@ export const forgetPassword = asyncWrapper(async (req, res) => {
         message: `we couldnt find a user with this phone number -${req.body.phone}`,
       });
     }else{
-      const phonenum= phone;
+      const phone= req.body.phone;
       const token =  Math.floor( Math.random() * (9999999 - 1000000) + 1000000);
 
-console.log(phonenum);
-const cred={phone,token};
+console.log(phone);
+// const cred={phone,token};
 
  
 var data = {"api_token": "VT1XrGg3X01CaRv5lJrBn09DJ1MPtVkPKfjxVjsHYdUZMv6IjEzzA62xPScn",
@@ -241,8 +241,6 @@ console.log(response.body);
 });	
 
      
-     
-console.log(phonenum);
       // sms({message});
       return res.status(200).json({
         message: 'token sent to this phone ',
