@@ -203,7 +203,7 @@ return result;
 // reset password
 export const forgetPassword = asyncWrapper(async (req, res) => {
   try {
-
+    const phone= req.body.phone;
     const user = await Usermod.findOne({ phone: req.body.phone });
 
     if (!user) {
