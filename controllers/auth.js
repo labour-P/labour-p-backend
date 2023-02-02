@@ -212,7 +212,7 @@ export const forgetPassword = asyncWrapper(async (req, res) => {
       });
     }else{
       const phone= req.body.phone;
-      const token =  Math.floor( Math.random() * (9999999 - 1000000) + 1000000);
+      const token =  Math.floor( Math.random() * (999999 - 100000) + 100000);
 
 console.log(phone);
 // const cred={phone,token};
