@@ -301,7 +301,7 @@ export const resetPassword = asyncWrapper(async (req, res) => {
 
     Usermod.password = hashedpassword;
     await Usermod.save();
-    return res.status(200).json({ message: "password changed successfully" });
+    return res.status(200).json({ message: "Password Changed Successfully" });
   } catch (err) {
     return res
       .status(500)
