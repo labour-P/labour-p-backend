@@ -215,7 +215,6 @@ export const forgetPassword = asyncWrapper(async (req, res) => {
       const token =  Math.floor( Math.random() * (999999 - 100000) + 100000);
 
 console.log(phone);
-// const cred={phone,token};
 
  
 var data = {"api_token": "VT1XrGg3X01CaRv5lJrBn09DJ1MPtVkPKfjxVjsHYdUZMv6IjEzzA62xPScn",
@@ -241,7 +240,6 @@ console.log(response.body);
 });	
 
      
-      // sms({message});
       return res.status(200).json({
         message: 'token sent to this phone ',
         token:token
@@ -302,7 +300,7 @@ export const resetPassword = asyncWrapper(async (req, res) => {
     const hashedpassword = await bcrypt.hash(password, 12);
 
     Usermod.password = hashedpassword;
-    Usermod.save();
+    await Usermod.save();
     return res.status(200).json({ message: "password changed successfully" });
   } catch (err) {
     return res
