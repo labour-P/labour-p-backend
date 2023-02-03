@@ -300,7 +300,7 @@ export const resetPassword = asyncWrapper(async (req, res) => {
     const hashedpassword = await bcrypt.hash(password, 12);
 
     Usermod.password = hashedpassword;
-    await Usermod.save();
+    await Usermod.save({password : hashedpassword});
     return res.status(200).json({ message: "Password Changed Successfully" });
   } catch (err) {
     return res
